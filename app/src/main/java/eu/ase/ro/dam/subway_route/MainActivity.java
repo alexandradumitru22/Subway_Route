@@ -60,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),getApplicationContext().getPackageName(),Toast.LENGTH_SHORT).show();
                 break;
             case R.id.item_feedback:
-                Toast.makeText(getApplicationContext(),getApplicationContext().getPackageName(),Toast.LENGTH_SHORT).show();
+                intent = new Intent(getApplicationContext(), FeedbackActivity.class);
+                startActivity(intent);
                 break;
         }
         return true;
