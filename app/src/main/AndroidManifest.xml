@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".SearchRouteActivity"></activity>
+        <activity android:name=".InfoActivity"></activity>
+        <activity android:name=".SearchRouteActivity" />
         <activity android:name=".RoutesActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />

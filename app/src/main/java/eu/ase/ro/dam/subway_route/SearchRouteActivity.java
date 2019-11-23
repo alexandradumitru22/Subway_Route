@@ -23,7 +23,7 @@ public class SearchRouteActivity extends AppCompatActivity {
     RadioButton rbYes;
     RadioButton rbNo;
     CheckBox cbSave;
-    Button btnSeach;
+    Button btnSearch;
     Intent intent;
 
     @Override
@@ -42,9 +42,9 @@ public class SearchRouteActivity extends AppCompatActivity {
         rbYes = findViewById(R.id.search_route_rb_yes);
         rbNo = findViewById(R.id.search_route_rb_no);
         cbSave = findViewById(R.id.search_route_cb_save);
-        btnSeach = findViewById(R.id.search_route_btn_search);
+        btnSearch = findViewById(R.id.search_route_btn_search);
 
-        btnSeach.setOnClickListener(new View.OnClickListener() {
+        btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(infoValidation()){
@@ -56,7 +56,6 @@ public class SearchRouteActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     private Route createRoute(){

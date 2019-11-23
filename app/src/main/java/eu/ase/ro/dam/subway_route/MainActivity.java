@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initView();
     }
 
     @Override
@@ -47,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.item_login:
-                Toast.makeText(getApplicationContext(),getApplicationContext().getPackageName(),Toast.LENGTH_SHORT).show();
+                intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
                 break;
             case R.id.item_routes:
                 intent = new Intent(getApplicationContext(), RoutesActivity.class);

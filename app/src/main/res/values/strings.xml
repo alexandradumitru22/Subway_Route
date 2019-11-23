@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">Subway_Route</string>
+    <string name="app_name">Subway Route</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Parola:</string>
+    <string name="hint_repeat_password">Repeta parola</string>
+    <string name="btn_register">Inregistrare</string>
+    <string name="hint_login">Logare</string>
 </resources>
