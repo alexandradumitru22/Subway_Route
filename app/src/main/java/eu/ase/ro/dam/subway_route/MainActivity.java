@@ -18,9 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eu.ase.ro.dam.subway_route.util_class.Route;
+import eu.ase.ro.dam.subway_route.util_interface.Const;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String ROUTES_KEY = "myroutes";
     public static final int REQUEST_CODE_SEARCH_ROUTE = 14;
     private List<Route> routes = new ArrayList<>();
     FloatingActionButton fabSearchRoute;
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.item_routes:
                 intent = new Intent(getApplicationContext(), RoutesActivity.class);
-                intent.putParcelableArrayListExtra(ROUTES_KEY, (ArrayList<Route>)routes);
+                intent.putParcelableArrayListExtra(Const.ROUTES_KEY, (ArrayList<Route>)routes);
                 startActivity(intent);
                 break;
             case R.id.item_info:
@@ -70,16 +70,23 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode == REQUEST_CODE_SEARCH_ROUTE && resultCode == RESULT_OK){
-            Route route = data.getParcelableExtra(SearchRouteActivity.SEARCH_ROUTE_KEY);
-            if(route != null){
-                Toast.makeText(getApplicationContext(),route.toString(),Toast.LENGTH_LONG).show();
+        if(resultCode == RESULT_OK && data!=null){
+            Route route = data.getParcelableExtra(Const.SEARCH_ROUTE_KEY);
+            if(requestCode == Const.SEARCH_ROUTE_CODE) {
+                if (route != null) {
+                    addRoute(route);
+                    Toast.makeText(getApplicationContext(), route.toString(), Toast.LENGTH_LONG).show();
+                }
             }
         }
     }
 
+    private void addRoute(Route r){
+        routes.add(r);
+    }
+
     private void initView() {
+        routes = new ArrayList<>();
         fabSearchRoute = findViewById(R.id.main_fab_search_route);
         fabSearchRoute.setOnClickListener(new View.OnClickListener() {
             @Override

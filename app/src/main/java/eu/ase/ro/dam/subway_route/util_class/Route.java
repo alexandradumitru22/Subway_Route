@@ -3,23 +3,34 @@ package eu.ase.ro.dam.subway_route.util_class;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import eu.ase.ro.dam.subway_route.SearchRouteActivity;
+
 public class Route implements Parcelable{
-    private String from;
+    private String depart;
     private String destination;
+    private Date date;
+    private String type;
     private String shortestRoute;
 
-    public Route(String from, String destination, String shortestRoute) {
-        this.from = from;
+    public Route(String depart, String destination, Date date, String type, String shortestRoute) {
+        this.depart = depart;
         this.destination = destination;
+        this.date = date;
+        this.type = type;
         this.shortestRoute = shortestRoute;
     }
 
-    public String getFrom() {
-        return from;
+    public String getDepart() {
+        return depart;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setDepart(String depart) {
+        this.depart = depart;
     }
 
     public String getDestination() {
@@ -30,6 +41,22 @@ public class Route implements Parcelable{
         this.destination = destination;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public String getShortestRoute() {
         return shortestRoute;
     }
@@ -38,14 +65,29 @@ public class Route implements Parcelable{
         this.shortestRoute = shortestRoute;
     }
 
-    @Override
-    public String toString() {
-        return "Se cauta ruta" +
-                " de la " + from +
-                " la " + destination +
-                ". Ruta cea mai scuta - " + shortestRoute +
-                ' ';
+    protected Route(Parcel in) {
+        this.depart = in.readString();
+        this.destination = in.readString();
+        try {
+            this.date = new SimpleDateFormat(SearchRouteActivity.MY_DATE_FORMAT, Locale.CANADA).parse(in.readString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        this.type = in.readString();
+        this.shortestRoute = in.readString();
     }
+
+    public static final Creator<Route> CREATOR = new Creator<Route>() {
+        @Override
+        public Route createFromParcel(Parcel in) {
+            return new Route(in);
+        }
+
+        @Override
+        public Route[] newArray(int size) {
+            return new Route[size];
+        }
+    };
 
     @Override
     public int describeContents() {
@@ -54,27 +96,13 @@ public class Route implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(from);
-        dest.writeString(destination);
+        dest.writeString(depart);
+        dest.writeString(destination);String dateString = this.date != null ? new SimpleDateFormat(SearchRouteActivity.MY_DATE_FORMAT, Locale.CANADA).format(this.date) : null;
+        dest.writeString(dateString);
+        dest.writeString(type);
         dest.writeString(shortestRoute);
     }
 
-    private Route (Parcel in){
-        this.from = in.readString();
-        this.destination=in.readString();
-        this.shortestRoute=in.readString();
-    }
 
-    public static Creator<Route> CREATOR = new Creator<Route>() {
-        @Override
-        public Route createFromParcel(Parcel source) {
-            return new Route(source);
-        }
-
-        @Override
-        public Route[] newArray(int size) {
-            return new Route[size];
-        }
-    };
 }
 

@@ -5,4 +5,10 @@
     <string name="hint_repeat_password">Repeta parola</string>
     <string name="btn_register">Inregistrare</string>
     <string name="hint_login">Logare</string>
+
+    <string-array name="search_route_type">
+        <item>Dus</item>
+        <item>Intors</item>
+        <item>Dus-Intors</item>
+    </string-array>
 </resources>
