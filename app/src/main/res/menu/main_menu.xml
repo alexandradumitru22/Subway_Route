@@ -11,6 +11,10 @@
         android:icon="@drawable/ic_nav_login"
         android:title="Logare" />
     <item
+        android:id="@+id/item_search_route"
+        android:icon="@drawable/ic_nav_search_route"
+        android:title="Cauta ruta" />
+    <item
         android:id="@+id/item_routes"
         android:icon="@drawable/ic_nav_routes"
         android:title="Rutele mele" />

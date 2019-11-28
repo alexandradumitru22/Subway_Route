@@ -35,6 +35,7 @@ public class SearchRouteActivity extends AppCompatActivity {
     RadioButton rbNo;
     Button btnSearch;
     Intent intent;
+    int ok = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,13 @@ public class SearchRouteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_route);
 
         initView();
+        //Route route = getIntent().getParcelableExtra(Const.POSITION_KEY);
+        /*if(route!=null){
+            ok = 1;
+            etFrom.setText(route.getDepart());
+            etDestination.setText(route.getDestination());
+            etDate.setText((CharSequence) route.getDate());
+        }*/
         intent = getIntent();
     }
 
