@@ -65,6 +65,17 @@ public class Route implements Parcelable{
         this.shortestRoute = shortestRoute;
     }
 
+    @Override
+    public String toString() {
+        return "Route{" +
+                "depart='" + depart + '\'' +
+                ", destination='" + destination + '\'' +
+                ", date=" + date +
+                ", type='" + type + '\'' +
+                ", shortestRoute='" + shortestRoute + '\'' +
+                '}';
+    }
+
     protected Route(Parcel in) {
         this.depart = in.readString();
         this.destination = in.readString();

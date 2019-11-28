@@ -43,6 +43,20 @@ public class SearchRouteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_route);
 
         initView();
+        intent = getIntent();
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(infoValidation()){
+                    Route route = createSearchedRoute();
+                    Toast.makeText(getApplicationContext(), route.toString(), Toast.LENGTH_LONG).show();
+                    intent.putExtra(Const.SEARCH_ROUTE_KEY, route);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
+            }
+        });
         //Route route = getIntent().getParcelableExtra(Const.POSITION_KEY);
         /*if(route!=null){
             ok = 1;
@@ -50,7 +64,6 @@ public class SearchRouteActivity extends AppCompatActivity {
             etDestination.setText(route.getDestination());
             etDate.setText((CharSequence) route.getDate());
         }*/
-        intent = getIntent();
     }
 
     private void initView() {
@@ -67,19 +80,6 @@ public class SearchRouteActivity extends AppCompatActivity {
         rbNo = findViewById(R.id.search_route_rb_no);
 
         btnSearch = findViewById(R.id.search_route_btn_search);
-
-        btnSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(infoValidation()){
-                    Route route = createSearchedRoute();
-                    Toast.makeText(getApplicationContext(), route.toString(), Toast.LENGTH_LONG).show();
-                    intent.putExtra(Const.SEARCH_ROUTE_KEY, route);
-                    setResult(RESULT_OK, intent);
-                    finish();
-                }
-            }
-        });
     }
 
     private Route createSearchedRoute(){
