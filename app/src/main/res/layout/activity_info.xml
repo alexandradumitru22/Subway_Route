@@ -11,8 +11,8 @@
 
     <ImageView
         android:id="@+id/info_iv_info"
-        android:layout_width="300dp"
-        android:layout_height="150dp"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="32dp"

@@ -58,7 +58,7 @@ public class StationAdapter extends ArrayAdapter <SpecialTicket> {
     private void adaptStation(View view, String station){
         TextView textView = view.findViewById(R.id.ll_station_tv_station);
         if(station != null && !station.trim().isEmpty()){
-            textView.setText(station);
+            textView.setText("Statia: "+station);
         }
         else{
             textView.setText("*");
@@ -78,7 +78,7 @@ public class StationAdapter extends ArrayAdapter <SpecialTicket> {
     private void adaptStdProgram(View view, String stdProg){
         TextView textView = view.findViewById(R.id.ll_std_program_tv_std);
         if(stdProg != null && !stdProg.trim().isEmpty()){
-            textView.setText(stdProg);
+            textView.setText("Program saptamanal: "+stdProg);
         }
         else{
             textView.setText("*");
@@ -88,7 +88,7 @@ public class StationAdapter extends ArrayAdapter <SpecialTicket> {
     private void adaptWeekendProg(View view, String weekendProg){
         TextView textView = view.findViewById(R.id.ll_weekend_prog_tv_wp);
         if(weekendProg != null && !weekendProg.trim().isEmpty()){
-            textView.setText(weekendProg);
+            textView.setText("Program weekend: "+weekendProg);
         }
         else{
             textView.setText("*");

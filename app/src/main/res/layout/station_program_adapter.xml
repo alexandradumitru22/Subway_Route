@@ -22,6 +22,7 @@
                 android:id="@+id/ll_station_tv_station"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:layout_weight="1"/>
         </LinearLayout>
 
@@ -36,6 +37,7 @@
                 android:id="@+id/ll_line_tv_line"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:layout_weight="1"/>
         </LinearLayout>
     </LinearLayout>
@@ -79,6 +81,7 @@
             android:id="@+id/ll_details_tv_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textStyle="italic"
             android:layout_weight="1" />
     </LinearLayout>
 </RelativeLayout>

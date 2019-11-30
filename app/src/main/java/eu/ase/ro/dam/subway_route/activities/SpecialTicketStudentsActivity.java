@@ -20,7 +20,6 @@ import eu.ase.ro.dam.subway_route.util_class.StationAdapter;
 
 public class SpecialTicketStudentsActivity extends AppCompatActivity {
     private static final String url = "https://api.myjson.com/bins/o91qe";
-    //private static final String URL = "https://api.myjson.com/bins/1e2eiu";
     private HttpResponse httpResponse;
 
     private ListView lvStudentCounter;
