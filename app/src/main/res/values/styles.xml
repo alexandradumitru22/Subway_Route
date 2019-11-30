@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -6,6 +6,9 @@
         <item name="colorPrimary">#433a52</item>
         <item name="colorPrimaryDark">#292333</item>
         <item name="colorAccent">#3d1e5e</item>
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">monospace</item>
+        <item name="android:textColor">#292333</item>
+        <item name="android:textSize">15dp</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

@@ -61,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent,Const.ROUTES_CODE);
                 break;
             case R.id.item_info:
-                Toast.makeText(getApplicationContext(),getApplicationContext().getPackageName(),Toast.LENGTH_SHORT).show();
+                intent = new Intent(getApplicationContext(), InfoActivity.class);
+                startActivity(intent);
                 break;
             case R.id.item_feedback:
                 intent = new Intent(getApplicationContext(), FeedbackActivity.class);

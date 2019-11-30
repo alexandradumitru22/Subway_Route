@@ -15,6 +15,17 @@
     <string name="tv_shortest_route">Cauta ruta cea mai scurta</string>
     <string name="search">Cauta</string>
     <string name="trip_date">Data calatoriei:</string>
+    <string name="lines">Magistralele circulate:</string>
+    <string name="tv_m1">M1: Dristor-Pantelimon</string>
+    <string name="tv_m2">M2: Berceni-Pipera</string>
+    <string name="tv_m3">M3: Preciziei-Anghel Saligny</string>
+    <string name="tv_m4">M4: Gara de Nord-Straulesti</string>
+    <string name="info_s">Abonamente Elevi-Studenti</string>
+    <string name="info_v">Abonamente Veterani Razboi</string>
+    <string name="info_d">Abonamente Donatori</string>
+    <string name="info_f">Abonamente Persoane cu Handicap</string>
+    <string name="info_case_sp">Pentru abonamente speciale, sunt disponibile urmatoarele case:</string>
+    <string name="case_pentru_abonamente_elev_student">Case pentru abonamente elev-student</string>
 
     <string-array name="search_route_type">
         <item>Dus</item>

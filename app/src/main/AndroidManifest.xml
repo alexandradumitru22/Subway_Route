@@ -11,7 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.FeedbackActivity"></activity>
+        <activity android:name=".activities.SpecialTicketHandicapActivity"></activity>
+        <activity android:name=".activities.SpecialTicketDonatoriActivity" />
+        <activity android:name=".activities.SpecialTicketVeteraniActivity" />
+        <activity android:name=".activities.SpecialTicketStudentsActivity" />
+        <activity android:name=".activities.FeedbackActivity" />
         <activity android:name=".activities.InfoActivity" />
         <activity android:name=".activities.SearchRouteActivity" />
         <activity android:name=".activities.RoutesActivity" />
@@ -34,5 +38,7 @@
             </intent-filter>
         </activity>
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
