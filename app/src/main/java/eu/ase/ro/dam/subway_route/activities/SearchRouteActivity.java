@@ -1,4 +1,4 @@
-package eu.ase.ro.dam.subway_route;
+package eu.ase.ro.dam.subway_route.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import eu.ase.ro.dam.subway_route.R;
 import eu.ase.ro.dam.subway_route.util_class.Route;
 import eu.ase.ro.dam.subway_route.util_interface.Const;
 

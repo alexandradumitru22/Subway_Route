@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import eu.ase.ro.dam.subway_route.SearchRouteActivity;
+import eu.ase.ro.dam.subway_route.activities.SearchRouteActivity;
 
 public class Route implements Parcelable{
     private String depart;

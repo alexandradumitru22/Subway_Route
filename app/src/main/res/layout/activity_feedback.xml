@@ -7,7 +7,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FeedbackActivity">
+    tools:context=".activities.FeedbackActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -40,7 +40,7 @@
             android:id="@+id/feedback_et_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Lasa-ne un comentariu"
+            android:hint="@string/leave_comment"
             android:inputType="textMultiLine" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -66,7 +66,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Da-ne o nota"
+        android:text="@string/mark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

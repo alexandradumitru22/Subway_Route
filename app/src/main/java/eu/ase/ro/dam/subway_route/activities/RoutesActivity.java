@@ -1,4 +1,4 @@
-package eu.ase.ro.dam.subway_route;
+package eu.ase.ro.dam.subway_route.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,7 +14,9 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
+import eu.ase.ro.dam.subway_route.R;
 import eu.ase.ro.dam.subway_route.util_class.Route;
+import eu.ase.ro.dam.subway_route.util_class.RouteAdapter;
 import eu.ase.ro.dam.subway_route.util_interface.Const;
 
 public class RoutesActivity extends AppCompatActivity {
@@ -28,6 +30,10 @@ public class RoutesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_routes);
 
+        initView();
+    }
+
+    private void initView (){
         lv_routes = findViewById(R.id.routes_lv_routes);
         intent = getIntent(); //am luat intentul
         ArrayList<Route> list = intent.getParcelableArrayListExtra(Const.ROUTES_KEY); //am luat lista in listview
@@ -35,8 +41,10 @@ public class RoutesActivity extends AppCompatActivity {
             routes = list;
         }
 
-        ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, routes);
+        //ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, routes);
+        RouteAdapter adapter = new RouteAdapter(getApplicationContext(), R.layout.route_adapter, routes, getLayoutInflater());
         lv_routes.setAdapter(adapter);
+
     }
 
 

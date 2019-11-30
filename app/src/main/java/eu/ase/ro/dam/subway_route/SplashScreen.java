@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import eu.ase.ro.dam.subway_route.activities.MainActivity;
+
 public class SplashScreen extends AppCompatActivity {
 
     @Override

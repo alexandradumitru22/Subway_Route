@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/search_route_til_to"
         app:layout_constraintTop_toBottomOf="@+id/search_route_til_to"
-        tools:context=".SearchRouteActivity">
+        tools:context=".activities.SearchRouteActivity">
 
         <ImageView
             android:id="@+id/search_route_iv_search"
@@ -43,7 +43,7 @@
                 android:id="@+id/search_route_et_from"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Plecare din statia:" />
+                android:hint="@string/from" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -63,7 +63,7 @@
                 android:id="@+id/search_route_et_to"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Sosire in statia:" />
+                android:hint="@string/destination" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <RadioGroup
@@ -87,14 +87,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Da" />
+                android:text="@string/rb_yes" />
 
             <RadioButton
                 android:id="@+id/search_route_rb_no"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Nu" />
+                android:text="@string/rb_no" />
         </RadioGroup>
 
         <TextView
@@ -106,7 +106,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:text="Alege tipul de calatorie:"
+            android:text="@string/choose_type"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -121,7 +121,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:text="Cauta ruta cea mai scurta"
+            android:text="@string/tv_shortest_route"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -137,7 +137,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="32dp"
-            android:text="Cauta"
+            android:text="@string/search"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.505"
@@ -161,7 +161,7 @@
                 android:id="@+id/search_route_et_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Data calatoriei:" />
+                android:hint="@string/trip_date" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Spinner

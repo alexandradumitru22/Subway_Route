@@ -11,12 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".FeedbackActivity"></activity>
-        <activity android:name=".InfoActivity" />
-        <activity android:name=".SearchRouteActivity" />
-        <activity android:name=".RoutesActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".activities.FeedbackActivity"></activity>
+        <activity android:name=".activities.InfoActivity" />
+        <activity android:name=".activities.SearchRouteActivity" />
+        <activity android:name=".activities.RoutesActivity" />
+        <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.RegisterActivity" />
         <activity
             android:name=".SplashScreen"
             android:theme="@style/AppTheme.NoActionBar">
@@ -26,7 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

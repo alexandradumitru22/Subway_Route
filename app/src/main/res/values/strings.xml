@@ -5,6 +5,16 @@
     <string name="hint_repeat_password">Repeta parola</string>
     <string name="btn_register">Inregistrare</string>
     <string name="hint_login">Logare</string>
+    <string name="leave_comment">Lasa-ne un comentariu</string>
+    <string name="mark">Da-ne o nota</string>
+    <string name="from">Plecare din statia:</string>
+    <string name="destination">Sosire in statia:</string>
+    <string name="rb_yes">Da</string>
+    <string name="rb_no">Nu</string>
+    <string name="choose_type">Alege tipul de calatorie:</string>
+    <string name="tv_shortest_route">Cauta ruta cea mai scurta</string>
+    <string name="search">Cauta</string>
+    <string name="trip_date">Data calatoriei:</string>
 
     <string-array name="search_route_type">
         <item>Dus</item>
