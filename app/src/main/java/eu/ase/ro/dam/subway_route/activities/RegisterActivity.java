@@ -2,9 +2,11 @@ package eu.ase.ro.dam.subway_route.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -15,6 +17,7 @@ public class RegisterActivity extends AppCompatActivity {
     TextInputEditText et_password;
     TextInputEditText et_confirm_password;
     Button button_register;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +36,29 @@ public class RegisterActivity extends AppCompatActivity {
         button_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(infoValidation()) {
+                    Toast.makeText(getApplicationContext(), "S-a creat utilizatorul", Toast.LENGTH_LONG).show();
+                    intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
+    }
+
+    private boolean infoValidation(){
+        if(et_email.getText() == null || et_email.getText().toString().trim().isEmpty()){
+            Toast.makeText(getApplicationContext(), "Introduceti email-ul!", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if(et_password.getText() == null || et_password.getText().toString().trim().isEmpty()){
+            Toast.makeText(getApplicationContext(), "Setati o parola", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if(et_confirm_password.getText() == null || et_confirm_password.getText().toString().trim().isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Repetati parola", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 }

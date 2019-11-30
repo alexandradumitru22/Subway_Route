@@ -79,6 +79,7 @@ public class SearchRouteActivity extends AppCompatActivity {
         rgLenght = findViewById(R.id.search_route_rg_shortest_route);
         rbYes = findViewById(R.id.search_route_rb_yes);
         rbNo = findViewById(R.id.search_route_rb_no);
+        rgLenght.check(R.id.search_route_rb_no);
 
         btnSearch = findViewById(R.id.search_route_btn_search);
     }
