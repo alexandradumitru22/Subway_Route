@@ -37,7 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(infoValidation()) {
-                    Toast.makeText(getApplicationContext(), "S-a creat utilizatorul. Va puteti conecta...", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.info_creare_user, Toast.LENGTH_LONG).show();
                     intent = new Intent(RegisterActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
@@ -48,15 +48,15 @@ public class RegisterActivity extends AppCompatActivity {
 
     private boolean infoValidation(){
         if(et_email.getText() == null || et_email.getText().toString().trim().isEmpty()){
-            Toast.makeText(getApplicationContext(), "Introduceti email-ul!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.err_mail, Toast.LENGTH_LONG).show();
             return false;
         }
         if(et_password.getText() == null || et_password.getText().toString().trim().isEmpty()){
-            Toast.makeText(getApplicationContext(), "Setati o parola", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.err_set_pass, Toast.LENGTH_LONG).show();
             return false;
         }
         if(et_confirm_password.getText() == null || et_confirm_password.getText().toString().trim().isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Repetati parola", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.err_confirm_pass, Toast.LENGTH_LONG).show();
             return false;
         }
         return true;

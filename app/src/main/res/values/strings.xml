@@ -26,6 +26,16 @@
     <string name="info_f">Abonamente Persoane cu Handicap</string>
     <string name="info_case_sp">Pentru abonamente speciale, sunt disponibile urmatoarele case:</string>
     <string name="case_pentru_abonamente_elev_student">Case pentru abonamente elev-student</string>
+    <string name="err_mail">Introduceti email-ul!</string>
+    <string name="err_pass">Introduceti parola</string>
+    <string name="info_creare_user">S-a creat utilizatorul. Va puteti conecta...</string>
+    <string name="err_set_pass">Setati o parola</string>
+    <string name="err_confirm_pass">Repetati parola</string>
+    <string name="err_from">Introduceti statia de plecare!</string>
+    <string name="err_dest">Introduceti destinatia!</string>
+    <string name="err_date">Data trebuie sa aiba formatul: dd.MM.yyyy</string>
+    <string name="info_preluare_json">Se preia lista...</string>
+    <string name="info_json_preluat">Lista statiilor preluata cu succes</string>
 
     <string-array name="search_route_type">
         <item>Dus</item>

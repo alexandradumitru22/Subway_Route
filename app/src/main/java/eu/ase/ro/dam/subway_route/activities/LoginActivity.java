@@ -45,11 +45,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private boolean infoValidation(){
         if(email.getText() == null || email.getText().toString().trim().isEmpty()){
-            Toast.makeText(getApplicationContext(), "Introduceti email-ul!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.err_mail, Toast.LENGTH_LONG).show();
             return false;
         }
         if(password.getText() == null || password.getText().toString().trim().isEmpty()){
-            Toast.makeText(getApplicationContext(), "Introduceti parola", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.err_pass, Toast.LENGTH_LONG).show();
             return false;
         }
         return true;

@@ -36,10 +36,10 @@ public class SpecialTicketStudentsActivity extends AppCompatActivity {
         new HttpManager(){
             @Override
             protected void onPostExecute(String s) {
-                Toast.makeText(getApplicationContext(), "Se preia lista... ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.info_preluare_json, Toast.LENGTH_SHORT).show();
                 httpResponse= JsonParser.parseJson(s);
                 if(httpResponse !=null){
-                    Toast.makeText(getApplicationContext(), "Lista statiilor preluata cu succes", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.info_json_preluat, Toast.LENGTH_SHORT).show();
                 }
                 if (httpResponse != null && httpResponse.getEleviStudenti() != null){
                     selectStudStation(httpResponse.getEleviStudenti());

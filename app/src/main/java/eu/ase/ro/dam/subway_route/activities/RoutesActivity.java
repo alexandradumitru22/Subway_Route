@@ -37,7 +37,7 @@ public class RoutesActivity extends AppCompatActivity {
 
     private void initView (){
         lv_routes = findViewById(R.id.routes_lv_routes);
-        intent = getIntent(); //am luat intentul
+        intent = getIntent();
         ArrayList<Route> list = intent.getParcelableArrayListExtra(Const.ROUTES_KEY); //am luat lista in listview
         if( list!=null ){
             routes = list;

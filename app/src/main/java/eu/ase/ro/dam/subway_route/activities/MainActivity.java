@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if ((resultCode == RESULT_OK && data != null) && (requestCode == Const.SEARCH_ROUTE_CODE)) {//tratez pt adaugare in lista
+        if ((resultCode == RESULT_OK && data != null) && (requestCode == Const.SEARCH_ROUTE_CODE)) {
             Route route = data.getParcelableExtra(Const.SEARCH_ROUTE_KEY);
             if (route != null) {
                 addRoute(route);

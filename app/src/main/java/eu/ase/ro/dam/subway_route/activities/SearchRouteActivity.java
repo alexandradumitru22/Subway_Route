@@ -132,15 +132,15 @@ public class SearchRouteActivity extends AppCompatActivity {
 
     private boolean infoValidation(){
         if(etFrom.getText() == null || etFrom.getText().toString().trim().isEmpty()){
-            Toast.makeText(getApplicationContext(), "Introduceti statia de plecare!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.err_from, Toast.LENGTH_LONG).show();
             return false;
         }
         if(etDestination.getText() == null || etDestination.getText().toString().trim().isEmpty()){
-            Toast.makeText(getApplicationContext(), "Introduceti destinatia!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.err_dest, Toast.LENGTH_LONG).show();
             return false;
         }
         if(etDate.getText() == null || etDate.getText().toString().trim().isEmpty() || !dateValidation(etDate.getText().toString())) {
-            Toast.makeText(getApplicationContext(), "Data trebuie sa aiba formatul: dd.MM.yyyy", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.err_date, Toast.LENGTH_LONG).show();
             return false;
         }
         return true;
