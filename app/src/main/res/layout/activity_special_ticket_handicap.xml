@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:textSize="16sp"
-        android:text="Case pentru abonamente persoane cu handicap" />
+        android:text="@string/ch" />
 
     <ListView
         android:id="@+id/stfh_lv_sh"

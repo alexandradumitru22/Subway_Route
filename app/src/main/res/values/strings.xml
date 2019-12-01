@@ -36,6 +36,20 @@
     <string name="err_date">Data trebuie sa aiba formatul: dd.MM.yyyy</string>
     <string name="info_preluare_json">Se preia lista...</string>
     <string name="info_json_preluat">Lista statiilor preluata cu succes</string>
+    <string name="sau_cauta_o_ruta_folosind_harti">Sau... cauta o ruta folosind Harti</string>
+    <string name="nu_ai_cont_inregistreaza_te">Nu ai cont? Inregistreaza-te!</string>
+    <string name="info_deconectare">Utilizatorul a fost deconectat</string>
+    <string name="eventUpload">De aici se incarca imaginea de profil</string>
+    <string name="aici_vor_fi_statiile_ce_alcatuiesc_ruta">Aici vor fi statiile ce alcatuiesc ruta</string>
+    <string name="todo">TODO</string>
+    <string name="ai_oferit_aplicatiei_nota">Ai oferit aplicatiei nota:</string>
+    <string name="username">Username:</string>
+    <string name="username_damproject_ro">username@damproject.ro</string>
+    <string name="mark_10">10/10</string>
+    <string name="deconectare">Deconectare</string>
+    <string name="cd">Case pentru abonamente donatori</string>
+    <string name="ch">Case pentru abonamente persoane cu handicap</string>
+    <string name="cv">Case pentru abonamente veterani razboi</string>
 
     <string-array name="search_route_type">
         <item>Dus</item>

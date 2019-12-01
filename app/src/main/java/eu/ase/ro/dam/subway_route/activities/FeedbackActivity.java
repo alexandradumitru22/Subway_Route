@@ -36,7 +36,7 @@ public class FeedbackActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Feedback salvat", Toast.LENGTH_SHORT).show();
-                intent = new Intent(FeedbackActivity.this, MainActivity.class);
+                intent = new Intent(FeedbackActivity.this, ProfileActivity.class);
                 startActivity(intent);
                 finish();
             }

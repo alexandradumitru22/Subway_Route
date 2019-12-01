@@ -8,6 +8,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -15,6 +18,7 @@ import java.util.List;
 
 import eu.ase.ro.dam.subway_route.R;
 import eu.ase.ro.dam.subway_route.activities.FeedbackActivity;
+import eu.ase.ro.dam.subway_route.activities.InfoActivity;
 import eu.ase.ro.dam.subway_route.activities.LoginActivity;
 import eu.ase.ro.dam.subway_route.activities.RegisterActivity;
 import eu.ase.ro.dam.subway_route.activities.RoutesActivity;
@@ -22,31 +26,30 @@ import eu.ase.ro.dam.subway_route.activities.SearchRouteActivity;
 import eu.ase.ro.dam.subway_route.util_class.Route;
 import eu.ase.ro.dam.subway_route.util_interface.Const;
 
-public class MainActivity extends AppCompatActivity {
-    //public List<Route> routes = new ArrayList<>();
-    private MenuItem itemSearch;
-    private MenuItem itemRoutes;
-    private MenuItem itemFeedback;
+public class ProfileActivity extends AppCompatActivity {
+    public List<Route> routes = new ArrayList<>();
+    private ImageButton ibtnUpload;
+    private Button btnExit;
+    private MenuItem itemLogin;
+    private MenuItem itemRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_profile);
 
-        //initView();
+        initView();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.main_menu, menu);
-        itemSearch = menu.findItem(R.id.item_search_route);
-        itemRoutes = menu.findItem(R.id.item_routes);
-        itemFeedback = menu.findItem(R.id.item_feedback);
+        itemRegister = menu.findItem(R.id.item_register);
+        itemLogin= menu.findItem(R.id.item_login);
 
-        itemSearch.setVisible(false);
-        itemRoutes.setVisible(false);
-        itemFeedback.setVisible(false);
+        itemRegister.setVisible(false);
+        itemLogin.setVisible(false);
         return true;
     }
 
@@ -64,13 +67,13 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.item_search_route:
                 intent = new Intent(getApplicationContext(), SearchRouteActivity.class);
-                startActivityForResult(intent, Const.SEARCH_ROUTE_CODE);//pentru ca o sa pasez din main in lista
+                startActivityForResult(intent, Const.SEARCH_ROUTE_CODE);
                 break;
-            /*case R.id.item_routes:
-                intent = new Intent(getApplicationContext(), RoutesActivity.class);//ma duce in routes
-                intent.putParcelableArrayListExtra(Const.ROUTES_KEY, (ArrayList<Route>)routes);//pe intent pun ruta facuta in search
+            case R.id.item_routes:
+                intent = new Intent(getApplicationContext(), RoutesActivity.class);
+                intent.putParcelableArrayListExtra(Const.ROUTES_KEY, (ArrayList<Route>)routes);
                 startActivityForResult(intent,Const.ROUTES_CODE);
-                break;*/
+                break;
             case R.id.item_info:
                 intent = new Intent(getApplicationContext(), InfoActivity.class);
                 startActivity(intent);
@@ -83,8 +86,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-
-    /*@Override
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if ((resultCode == RESULT_OK && data != null) && (requestCode == Const.SEARCH_ROUTE_CODE)) {
@@ -102,5 +104,24 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView() {
         routes = new ArrayList<>();
-    }*/
+        btnExit = findViewById(R.id.profile_btn_deconectare);
+        ibtnUpload = findViewById(R.id.profile_ibtn_upload);
+
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), R.string.info_deconectare, Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        ibtnUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), R.string.eventUpload, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 }

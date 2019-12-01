@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="eu.ase.ro.dam.subway_route">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.SpecialTicketHandicapActivity"></activity>
+        <activity android:name=".activities.AllStations"></activity>
+        <activity android:name=".activities.ProfileActivity" />
+        <activity android:name=".activities.SpecialTicketHandicapActivity" />
         <activity android:name=".activities.SpecialTicketDonatoriActivity" />
         <activity android:name=".activities.SpecialTicketVeteraniActivity" />
         <activity android:name=".activities.SpecialTicketStudentsActivity" />
@@ -38,7 +42,5 @@
             </intent-filter>
         </activity>
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

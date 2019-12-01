@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:textSize="16sp"
-        android:text="Case pentru abonamente donatori" />
+        android:text="@string/cd" />
 
     <ListView
         android:id="@+id/stfd_lv_sd"
