@@ -18,6 +18,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -36,7 +37,6 @@ public class SearchRouteActivity extends AppCompatActivity {
     RadioButton rbNo;
     Button btnSearch;
     Intent intent;
-    int ok = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,25 +46,42 @@ public class SearchRouteActivity extends AppCompatActivity {
         initView();
         intent = getIntent();
 
-        btnSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(infoValidation()){
-                    Route route = createSearchedRoute();
-                    Toast.makeText(getApplicationContext(), route.toString(), Toast.LENGTH_LONG).show();
-                    intent.putExtra(Const.SEARCH_ROUTE_KEY, route);
-                    setResult(RESULT_OK, intent);
-                    finish();
-                }
+        if(intent.hasExtra(Const.SEARCH_ROUTE_KEY)){
+            Route route = intent.getParcelableExtra(Const.SEARCH_ROUTE_KEY);
+            editRoute(route);
+        }
+    }
+
+    private void editRoute(Route r){
+        etFrom.setText(r.getDepart());
+        etDestination.setText(r.getDestination());
+        if(r.getDate() != null){
+            etDate.setText(new SimpleDateFormat(MY_DATE_FORMAT, Locale.CANADA).format(r.getDate()));
+        }
+        if(r.getType() != null){
+            addType(r);
+        }
+        if(r.getShortestRoute() != null){
+            chooseShortestRoute(r);
+        }
+    }
+
+    private void addType(Route r){
+        ArrayAdapter<String> adapter = (ArrayAdapter<String>)spinType.getAdapter();
+        for(int i=0; i<adapter.getCount(); i++){
+            if(adapter.getItem(i).equals(r.getType())){
+                spinType.setSelection(i);
+                break;
             }
-        });
-        //Route route = getIntent().getParcelableExtra(Const.POSITION_KEY);
-        /*if(route!=null){
-            ok = 1;
-            etFrom.setText(route.getDepart());
-            etDestination.setText(route.getDestination());
-            etDate.setText((CharSequence) route.getDate());
-        }*/
+        }
+    }
+    private void chooseShortestRoute(Route r){
+        if(r.getShortestRoute().equals("Nu")){
+            rgLenght.check(R.id.search_route_rb_no);
+        }
+        else{
+            rgLenght.check(R.id.search_route_rb_yes);
+        }
     }
 
     private void initView() {
@@ -82,6 +99,19 @@ public class SearchRouteActivity extends AppCompatActivity {
         rgLenght.check(R.id.search_route_rb_no);
 
         btnSearch = findViewById(R.id.search_route_btn_search);
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(infoValidation()){
+                    Route route = createSearchedRoute();
+                    Toast.makeText(getApplicationContext(), route.toString(), Toast.LENGTH_LONG).show();
+                    intent.putExtra(Const.SEARCH_ROUTE_KEY, route);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
+            }
+        });
     }
 
     private Route createSearchedRoute(){

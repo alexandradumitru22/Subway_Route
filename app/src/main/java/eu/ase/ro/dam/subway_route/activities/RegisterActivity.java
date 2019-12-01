@@ -37,7 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(infoValidation()) {
-                    Toast.makeText(getApplicationContext(), "S-a creat utilizatorul", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "S-a creat utilizatorul. Va puteti conecta...", Toast.LENGTH_LONG).show();
                     intent = new Intent(RegisterActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();

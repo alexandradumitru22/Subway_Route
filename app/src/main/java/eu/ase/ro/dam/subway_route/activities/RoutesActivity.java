@@ -1,5 +1,6 @@
 package eu.ase.ro.dam.subway_route.activities;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -23,7 +24,8 @@ public class RoutesActivity extends AppCompatActivity {
     ListView lv_routes;
     List<Route> routes = new ArrayList<>();
     Intent intent;
-    //Adapter adapter1;
+    int selectedRouteIndex;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,23 +47,35 @@ public class RoutesActivity extends AppCompatActivity {
         RouteAdapter adapter = new RouteAdapter(getApplicationContext(), R.layout.route_adapter, routes, getLayoutInflater());
         lv_routes.setAdapter(adapter);
 
+        lv_routes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplicationContext(), SearchRouteActivity.class);
+                selectedRouteIndex = position;
+                intent.putExtra(Const.SEARCH_ROUTE_KEY, routes.get(position));
+                startActivityForResult(intent, Const.EDIT_ROUTE_CODE);
+            }
+        });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == Const.EDIT_ROUTE_CODE && resultCode == RESULT_OK && data != null){
+            Route route = data.getParcelableExtra(Const.SEARCH_ROUTE_KEY);
+            if(route != null){
+                updateRoute(route);
+                RouteAdapter adapter = (RouteAdapter) lv_routes.getAdapter();
+                adapter.notifyDataSetChanged();
+            }
+        }
+    }
 
-    /*@Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Route route = routes.get(position);
-        Intent intent = new Intent(getApplicationContext(), SearchRouteActivity.class);
-        intent.putExtra(Const.POSITION_KEY, position);
-        intent.putExtra(Const.SEARCH_ROUTE_KEY, route);
-        startActivityForResult(intent, 2);
-    }*/
-
-    /*@Override
-    public void onBackPressed() {
-        intent=getIntent();
-        intent.putExtra(Const.ROUTES_KEY, (Parcelable) routes);
-        setResult(RESULT_OK,intent);
-        super.onBackPressed();
-    }*/
+    private void updateRoute(Route r){
+        routes.get(selectedRouteIndex).setDepart(r.getDepart());
+        routes.get(selectedRouteIndex).setDestination(r.getDestination());
+        routes.get(selectedRouteIndex).setDate(r.getDate());
+        routes.get(selectedRouteIndex).setType(r.getType());
+        routes.get(selectedRouteIndex).setShortestRoute(r.getShortestRoute());
+    }
 }
