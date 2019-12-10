@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ public class ProfileActivity extends AppCompatActivity {
     private Button btnExit;
     private MenuItem itemLogin;
     private MenuItem itemRegister;
+    private TextView starNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +108,7 @@ public class ProfileActivity extends AppCompatActivity {
         routes = new ArrayList<>();
         btnExit = findViewById(R.id.profile_btn_deconectare);
         ibtnUpload = findViewById(R.id.profile_ibtn_upload);
+        starNumber = findViewById(R.id.profile_tv_mark);
 
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,5 +126,9 @@ public class ProfileActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), R.string.eventUpload, Toast.LENGTH_LONG).show();
             }
         });
+
+        Intent intent = getIntent();
+        Float mark = intent.getFloatExtra(Const.STAR_TRANSFER_KEY, 0);
+        starNumber.setText(mark.toString());
     }
 }
