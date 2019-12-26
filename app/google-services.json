@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "206206095777",
+    "firebase_url": "https://subwayroute-9776a.firebaseio.com",
+    "project_id": "subwayroute-9776a",
+    "storage_bucket": "subwayroute-9776a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:206206095777:android:29809ee345836e3df4fbe0",
+        "android_client_info": {
+          "package_name": "eu.ase.ro.dam.subway_route"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "206206095777-agfm4tlapffccoscbedfqcgq59ebqrf5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSIRPQDOGqasAQLMYCMjumnX7DF_nsCHM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "206206095777-agfm4tlapffccoscbedfqcgq59ebqrf5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
