@@ -29,7 +29,7 @@
     <string name="err_mail">Introduceti email-ul!</string>
     <string name="err_pass">Introduceti parola</string>
     <string name="info_creare_user">S-a creat utilizatorul. Va puteti conecta...</string>
-    <string name="err_set_pass">Setati o parola</string>
+    <string name="err_set_pass">Setati o parola de cel putin 7 caractere</string>
     <string name="err_confirm_pass">Repetati parola</string>
     <string name="err_from">Introduceti statia de plecare!</string>
     <string name="err_dest">Introduceti destinatia!</string>
@@ -50,6 +50,11 @@
     <string name="cd">Case pentru abonamente donatori</string>
     <string name="ch">Case pentru abonamente persoane cu handicap</string>
     <string name="cv">Case pentru abonamente veterani razboi</string>
+    <string name="errValidEmail">Introduceti o adresa de email valida!</string>
+    <string name="errSamePass">Parolele nu coincid!</string>
+    <string name="errOnStartSignIn">Utilizator deja autentificat!</string>
+    <string name="errSameUser">Acest utilizator exista deja!</string>
+    <string name="errAuth">Autentificare esuata!</string>
 
     <string-array name="search_route_type">
         <item>Dus</item>
