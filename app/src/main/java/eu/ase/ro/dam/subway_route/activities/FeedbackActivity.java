@@ -37,19 +37,11 @@ public class FeedbackActivity extends AppCompatActivity {
         rtb_feedback = findViewById(R.id.feedback_rtb_star);
         ibtn_save = findViewById(R.id.feedback_ibtn_save);
 
-        sharedPreferences = getSharedPreferences(Const.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-
         ibtn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Feedback salvat", Toast.LENGTH_SHORT).show();
                 intent = new Intent(FeedbackActivity.this, ProfileActivity.class);
-
-                float value = sharedPreferences.getFloat(Const.SHARED_PREF_RATING_KEY, -1);
-                if(value != -1){
-                    rtb_feedback.setRating(value);
-                }
-                intent.putExtra(Const.STAR_TRANSFER_KEY, value);
                 startActivity(intent);
                 finish();
             }
@@ -58,6 +50,7 @@ public class FeedbackActivity extends AppCompatActivity {
         rtb_feedback.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                sharedPreferences = getSharedPreferences(Const.SHARED_PREF_NAME, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putFloat(Const.SHARED_PREF_RATING_KEY, rating);
                 editor.apply();

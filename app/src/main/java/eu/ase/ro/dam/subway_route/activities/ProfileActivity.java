@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,6 +38,8 @@ public class ProfileActivity extends AppCompatActivity {
     private MenuItem itemLogin;
     private MenuItem itemRegister;
     private TextView starNumber;
+    private TextView userConnected;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,8 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         initView();
+
+
     }
 
     @Override
@@ -111,12 +117,25 @@ public class ProfileActivity extends AppCompatActivity {
         btnExit = findViewById(R.id.profile_btn_deconectare);
         ibtnUpload = findViewById(R.id.profile_ibtn_upload);
         starNumber = findViewById(R.id.profile_tv_mark);
+        userConnected = findViewById(R.id.profile_tv_user);
 
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), R.string.info_deconectare, Toast.LENGTH_LONG).show();
+                sharedPreferences = getSharedPreferences(Const.SHARED_PREF_LOG, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.remove(Const.SP_MAIL_KEY);
+                editor.remove(Const.SP_PASS_KEY);
+                editor.apply();
+
+                sharedPreferences=getSharedPreferences(Const.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor1= sharedPreferences.edit();
+                editor1.remove(Const.SHARED_PREF_RATING_KEY);
+                editor1.apply();
+
                 FirebaseAuth.getInstance().signOut();
+
                 Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(intent);
                 finish();
@@ -130,8 +149,12 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        Intent intent = getIntent();
-        Float mark = intent.getFloatExtra(Const.STAR_TRANSFER_KEY, 0);
-        starNumber.setText(mark.toString());
+        SharedPreferences mark = getSharedPreferences(Const.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        float nota = mark.getFloat(Const.SHARED_PREF_RATING_KEY, 0);
+        starNumber.setText(String.valueOf(nota));
+
+        SharedPreferences user = getSharedPreferences(Const.SHARED_PREF_LOG, Context.MODE_PRIVATE);
+        String username = user.getString(Const.SP_MAIL_KEY, null);
+        userConnected.setText(username);
     }
 }

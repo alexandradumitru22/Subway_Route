@@ -3,7 +3,9 @@ package eu.ase.ro.dam.subway_route.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -18,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import eu.ase.ro.dam.subway_route.R;
+import eu.ase.ro.dam.subway_route.util_interface.Const;
 
 public class LoginActivity extends AppCompatActivity {
     TextInputEditText email;
@@ -25,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     Intent intent;
     FirebaseAuth mAuth;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +37,11 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         initView();
-    }
+        Toast.makeText(getApplicationContext(), myEmail(), Toast.LENGTH_SHORT).show();
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Toast.makeText(getApplicationContext(), "Utilizator conectat!", Toast.LENGTH_LONG).show();
+        if(myEmail() != null){
+            Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -54,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(infoValidation()){
                     login();
+                    Toast.makeText(getApplicationContext(), myEmail(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -69,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Logare cu succes
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            rememberMe(mail, pass);
                             intent = new Intent(LoginActivity.this, ProfileActivity.class);
                             startActivity(intent);
                             finish();
@@ -79,6 +81,19 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public void rememberMe(String email, String password){
+        sharedPreferences = getSharedPreferences(Const.SHARED_PREF_LOG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(Const.SP_MAIL_KEY, email);
+        editor.putString(Const.SP_PASS_KEY, password);
+        editor.apply();
+    }
+
+    public String myEmail(){
+        sharedPreferences = getSharedPreferences(Const.SHARED_PREF_LOG, Context.MODE_PRIVATE);
+        return sharedPreferences.getString(Const.SP_MAIL_KEY, null);
     }
 
     private boolean infoValidation(){
