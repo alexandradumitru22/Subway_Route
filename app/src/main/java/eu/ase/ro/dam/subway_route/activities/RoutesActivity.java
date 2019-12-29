@@ -1,15 +1,11 @@
 package eu.ase.ro.dam.subway_route.activities;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -24,7 +20,7 @@ public class RoutesActivity extends AppCompatActivity {
     ListView lv_routes;
     List<Route> routes = new ArrayList<>();
     Intent intent;
-    int selectedRouteIndex;
+    //int selectedRouteIndex;
 
 
     @Override
@@ -50,21 +46,21 @@ public class RoutesActivity extends AppCompatActivity {
         lv_routes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), SearchRouteActivity.class);
-                selectedRouteIndex = position;
-                intent.putExtra(Const.SEARCH_ROUTE_KEY, routes.get(position));
-                startActivityForResult(intent, Const.EDIT_ROUTE_CODE);
+                Intent intent = new Intent(getApplicationContext(), AllStations.class);
+                /*selectedRouteIndex = position;
+                intent.putExtra(Const.SEARCH_ROUTE_KEY, routes.get(position));*/
+                startActivity(intent);
             }
         });
     }
 
-    @Override
+    /*@Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == Const.EDIT_ROUTE_CODE && resultCode == RESULT_OK && data != null){
             Route route = data.getParcelableExtra(Const.SEARCH_ROUTE_KEY);
             if(route != null){
-                updateRoute(route);
+                //updateRoute(route);
                 RouteAdapter adapter = (RouteAdapter) lv_routes.getAdapter();
                 adapter.notifyDataSetChanged();
             }
@@ -77,5 +73,5 @@ public class RoutesActivity extends AppCompatActivity {
         routes.get(selectedRouteIndex).setDate(r.getDate());
         routes.get(selectedRouteIndex).setType(r.getType());
         routes.get(selectedRouteIndex).setShortestRoute(r.getShortestRoute());
-    }
+    }*/
 }

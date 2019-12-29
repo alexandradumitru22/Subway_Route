@@ -1,25 +1,14 @@
 package eu.ase.ro.dam.subway_route.activities;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import eu.ase.ro.dam.subway_route.R;
-import eu.ase.ro.dam.subway_route.activities.FeedbackActivity;
-import eu.ase.ro.dam.subway_route.activities.LoginActivity;
-import eu.ase.ro.dam.subway_route.activities.RegisterActivity;
-import eu.ase.ro.dam.subway_route.activities.RoutesActivity;
-import eu.ase.ro.dam.subway_route.activities.SearchRouteActivity;
-import eu.ase.ro.dam.subway_route.util_class.Route;
 import eu.ase.ro.dam.subway_route.util_interface.Const;
 
 public class MainActivity extends AppCompatActivity {

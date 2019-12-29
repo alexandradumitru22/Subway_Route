@@ -16,6 +16,7 @@ public class Route implements Parcelable{
     private Date date;
     private String type;
     private String shortestRoute;
+    private String username;
 
     public Route(String depart, String destination, Date date, String type, String shortestRoute) {
         this.depart = depart;
@@ -63,6 +64,14 @@ public class Route implements Parcelable{
 
     public void setShortestRoute(String shortestRoute) {
         this.shortestRoute = shortestRoute;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override

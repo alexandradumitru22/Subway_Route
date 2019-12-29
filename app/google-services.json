@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "206206095777-lc36p91u80nn9mf09rarcaaed1vuak8f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "eu.ase.ro.dam.subway_route",
+            "certificate_hash": "b4d8234d95794400b3b7ed6e892c263baff2f23b"
+          }
+        },
+        {
           "client_id": "206206095777-agfm4tlapffccoscbedfqcgq59ebqrf5.apps.googleusercontent.com",
           "client_type": 3
         }

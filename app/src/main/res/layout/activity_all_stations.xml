@@ -5,8 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="#f0e8fc"
-    android:layout_height="300dp"
-    android:layout_gravity="center"
+    android:layout_height="match_parent"
     tools:context=".activities.AllStations">
 
     <TextView

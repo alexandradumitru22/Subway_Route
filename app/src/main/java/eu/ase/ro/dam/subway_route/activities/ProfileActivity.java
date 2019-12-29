@@ -17,17 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import eu.ase.ro.dam.subway_route.R;
-import eu.ase.ro.dam.subway_route.activities.FeedbackActivity;
-import eu.ase.ro.dam.subway_route.activities.InfoActivity;
-import eu.ase.ro.dam.subway_route.activities.LoginActivity;
-import eu.ase.ro.dam.subway_route.activities.RegisterActivity;
-import eu.ase.ro.dam.subway_route.activities.RoutesActivity;
-import eu.ase.ro.dam.subway_route.activities.SearchRouteActivity;
 import eu.ase.ro.dam.subway_route.util_class.Route;
 import eu.ase.ro.dam.subway_route.util_interface.Const;
 
@@ -40,6 +35,8 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView starNumber;
     private TextView userConnected;
     private SharedPreferences sharedPreferences;
+
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +100,6 @@ public class ProfileActivity extends AppCompatActivity {
             Route route = data.getParcelableExtra(Const.SEARCH_ROUTE_KEY);
             if (route != null) {
                 addRoute(route);
-                Toast.makeText(getApplicationContext(), route.toString(), Toast.LENGTH_LONG).show();
             }
         }
     }
