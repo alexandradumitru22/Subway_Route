@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputEditText;
 
 import eu.ase.ro.dam.subway_route.R;
+import eu.ase.ro.dam.subway_route.util_class.Feedback;
 import eu.ase.ro.dam.subway_route.util_interface.Const;
 
 public class FeedbackActivity extends AppCompatActivity {
@@ -37,17 +38,7 @@ public class FeedbackActivity extends AppCompatActivity {
         rtb_feedback = findViewById(R.id.feedback_rtb_star);
         ibtn_save = findViewById(R.id.feedback_ibtn_save);
 
-        ibtn_save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Feedback salvat", Toast.LENGTH_SHORT).show();
-                intent = new Intent(FeedbackActivity.this, ProfileActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        rtb_feedback.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+        /*rtb_feedback.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 sharedPreferences = getSharedPreferences(Const.SHARED_PREF_NAME, Context.MODE_PRIVATE);
@@ -55,6 +46,33 @@ public class FeedbackActivity extends AppCompatActivity {
                 editor.putFloat(Const.SHARED_PREF_RATING_KEY, rating);
                 editor.apply();
             }
+        });*/
+
+        ibtn_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString(Const.SHARED_PREF_COMM_KEY, comment.getText().toString());
+                editor.apply();*/
+
+                Feedback feedback = createFeedback();
+
+                intent = getIntent();
+                Toast.makeText(getApplicationContext(), "Feedback salvat", Toast.LENGTH_SHORT).show();
+                //intent = new Intent(FeedbackActivity.this, ProfileActivity.class);
+                //startActivity(intent);
+                intent.putExtra(Const.FEEDBACK_KEY, feedback);
+                setResult(RESULT_OK);
+                finish();
+            }
         });
+    }
+
+    public Feedback createFeedback(){
+        String comm = comment.getText().toString();
+        //Float mark = sharedPreferences.getFloat(Const.SHARED_PREF_RATING_KEY, -1);
+        Float mark = rtb_feedback.getRating();
+
+        return new Feedback(comm, mark);
     }
 }

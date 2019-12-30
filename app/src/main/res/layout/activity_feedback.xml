@@ -40,8 +40,7 @@
             android:id="@+id/feedback_et_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/leave_comment"
-            android:inputType="textMultiLine" />
+            android:hint="@string/leave_comment"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <RatingBar
