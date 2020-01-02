@@ -34,7 +34,7 @@ public class StationService {
                 return null;
             }
             Station station = stations[0];
-            long id = stationDao.insert(station);
+            long id = stationDao.insertStation(station);
             if(id != -1){
                 station.setId(id);
                 return station;
@@ -53,7 +53,7 @@ public class StationService {
             if (stations == null || stations.length != 1) {
                 return -1;
             }
-            return stationDao.update(stations[0]);
+            return stationDao.updateStation(stations[0]);
         }
     }
 
@@ -67,7 +67,7 @@ public class StationService {
             if (stations == null || stations.length != 1) {
                 return -1;
             }
-            return stationDao.delete(stations[0]);
+            return stationDao.deleteStation(stations[0]);
         }
     }
 }

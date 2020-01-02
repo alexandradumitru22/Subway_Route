@@ -12,26 +12,26 @@ import androidx.room.PrimaryKey;
 public class SubwayLine implements Parcelable {
     @NonNull
     @PrimaryKey
-    @ColumnInfo(name = "ID")
+    @ColumnInfo(name = "id")
     long id;
 
     @NonNull
-    @ColumnInfo(name = "Name")
+    @ColumnInfo(name = "name")
     private String name;
 
-    @ColumnInfo(name = "FirstStation")
+    @ColumnInfo(name = "firstStation")
     private String firstStation;
 
-    @ColumnInfo(name = "LastStation")
+    @ColumnInfo(name = "lastStation")
     private String lastStation;
 
-    @ColumnInfo(name = "Color")
+    @ColumnInfo(name = "color")
     private String lineColor;
 
-    @ColumnInfo(name = "Active")
+    @ColumnInfo(name = "active")
     private int used;
 
-    public SubwayLine(long id, String name, String firstStation, String lastStation, String lineColor, int used) {
+    public SubwayLine(long id, @NonNull String name, String firstStation, String lastStation, String lineColor, int used) {
         this.id = id;
         this.name = name;
         this.firstStation = firstStation;
@@ -57,7 +57,7 @@ public class SubwayLine implements Parcelable {
 
         @Override
         public SubwayLine[] newArray(int size) {
-            return new SubwayLine[0];
+            return new SubwayLine[size];
         }
     };
 

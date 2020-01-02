@@ -13,28 +13,27 @@ import androidx.room.PrimaryKey;
 import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "stations",
-        indices = {@Index(value = "LineId", unique = true)},
-        foreignKeys = @ForeignKey(entity = SubwayLine.class, parentColumns = "ID", childColumns = "LineId", onDelete = CASCADE))
+        indices = {@Index(value = "lineId", unique = true)},
+        foreignKeys = @ForeignKey(entity = SubwayLine.class, parentColumns = "id", childColumns = "lineId", onDelete = CASCADE))
 public class Station implements Parcelable {
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "ID")
+    @ColumnInfo(name = "id")
     private long id;
 
-    @NonNull
-    @ColumnInfo(name = "Cod")
+    @ColumnInfo(name = "cod")
     private String cod;
 
-    @ColumnInfo(name = "Station")
+    @ColumnInfo(name = "station")
     private String stationName;
 
-    @ColumnInfo(name = "Node")
+    @ColumnInfo(name = "node")
     private int node;
 
-    @ColumnInfo(name = "LineId")
-    private int lineId;
+    @ColumnInfo(name = "lineId")
+    private long lineId;
 
-    public Station(long id, String cod, String stationName, int node, int lineId) {
+    public Station(long id, String cod, String stationName, int node, long lineId) {
         this.id = id;
         this.cod = cod;
         this.stationName = stationName;
@@ -47,7 +46,7 @@ public class Station implements Parcelable {
         cod = in.readString();
         stationName = in.readString();
         node = in.readInt();
-        lineId = in.readInt();
+        lineId = in.readLong();
     }
 
     public static final Creator<Station> CREATOR = new Creator<Station>() {
@@ -58,7 +57,7 @@ public class Station implements Parcelable {
 
         @Override
         public Station[] newArray(int size) {
-            return new Station[0];
+            return new Station[size];
         }
     };
 
@@ -94,11 +93,11 @@ public class Station implements Parcelable {
         this.node = node;
     }
 
-    public int getLineId() {
+    public long getLineId() {
         return lineId;
     }
 
-    public void setLineId(int lineId) {
+    public void setLineId(long lineId) {
         this.lineId = lineId;
     }
 
@@ -124,7 +123,7 @@ public class Station implements Parcelable {
         dest.writeString(cod);
         dest.writeString(stationName);
         dest.writeInt(node);
-        dest.writeInt(lineId);
+        dest.writeLong(lineId);
     }
 }
 

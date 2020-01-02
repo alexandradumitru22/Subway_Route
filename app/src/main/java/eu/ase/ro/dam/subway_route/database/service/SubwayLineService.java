@@ -34,7 +34,7 @@ public class SubwayLineService {
                 return null;
             }
             SubwayLine subwayLine = subwayLines[0];
-            long id = subwayLineDao.insert(subwayLine);
+            long id = subwayLineDao.insertLine(subwayLine);
             if(id != -1){
                 subwayLine.setId(id);
                 return subwayLine;
@@ -53,7 +53,7 @@ public class SubwayLineService {
             if(subwayLines == null || subwayLines.length != -1) {
                 return -1;
             }
-            return subwayLineDao.update(subwayLines[0]);
+            return subwayLineDao.updateLine(subwayLines[0]);
         }
     }
 
@@ -67,7 +67,7 @@ public class SubwayLineService {
             if(subwayLines == null || subwayLines.length != -1) {
                 return -1;
             }
-            return subwayLineDao.delete(subwayLines[0]);
+            return subwayLineDao.deleteLine(subwayLines[0]);
         }
     }
 }

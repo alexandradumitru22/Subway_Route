@@ -17,11 +17,14 @@ public interface StationDao {
     List<Station> getAllStations();
 
     @Insert
-    long insert (Station station);
+    long insertStation (Station station);
 
     @Update
-    int update (Station station);
+    int updateStation (Station station);
 
     @Delete
-    int delete (Station station);
+    int deleteStation (Station station);
+
+    @Query("select COUNT(*) from stations")
+    int countStations();
 }

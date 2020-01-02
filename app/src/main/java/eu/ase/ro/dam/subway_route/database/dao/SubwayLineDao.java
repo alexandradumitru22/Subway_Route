@@ -17,11 +17,14 @@ public interface SubwayLineDao {
     List<SubwayLine> getAllLines();
 
     @Insert
-    long insert(SubwayLine subwayLine);
+    long insertLine(SubwayLine subwayLine);
 
     @Update
-    int update (SubwayLine subwayLine);
+    int updateLine (SubwayLine subwayLine);
 
     @Delete
-    int delete(SubwayLine subwayLine);
+    int deleteLine(SubwayLine subwayLine);
+
+    @Query("select COUNT(*) from lines")
+    int countLines();
 }
