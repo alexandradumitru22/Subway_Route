@@ -13,7 +13,7 @@ public class SubwayLine implements Parcelable {
     @NonNull
     @PrimaryKey
     @ColumnInfo(name = "ID")
-    int id;
+    long id;
 
     @NonNull
     @ColumnInfo(name = "Name")
@@ -31,7 +31,7 @@ public class SubwayLine implements Parcelable {
     @ColumnInfo(name = "Active")
     private int used;
 
-    public SubwayLine(int id, String name, String firstStation, String lastStation, String lineColor, int used) {
+    public SubwayLine(long id, String name, String firstStation, String lastStation, String lineColor, int used) {
         this.id = id;
         this.name = name;
         this.firstStation = firstStation;
@@ -41,7 +41,7 @@ public class SubwayLine implements Parcelable {
     }
 
     protected SubwayLine(Parcel in) {
-        id = in.readInt();
+        id = in.readLong();
         name = in.readString();
         firstStation = in.readString();
         lastStation = in.readString();
@@ -61,11 +61,11 @@ public class SubwayLine implements Parcelable {
         }
     };
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -129,7 +129,7 @@ public class SubwayLine implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
+        dest.writeLong(id);
         dest.writeString(name);
         dest.writeString(firstStation);
         dest.writeString(lastStation);
