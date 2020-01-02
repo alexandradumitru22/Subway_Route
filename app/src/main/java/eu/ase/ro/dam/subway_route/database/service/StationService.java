@@ -30,7 +30,7 @@ public class StationService {
 
         @Override
         protected Station doInBackground(Station... stations) {
-            if(stations == null || stations.length != -1) {
+            if(stations == null || stations.length != 1) {
                 return null;
             }
             Station station = stations[0];

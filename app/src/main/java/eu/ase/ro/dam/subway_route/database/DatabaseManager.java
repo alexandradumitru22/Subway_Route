@@ -14,26 +14,9 @@ import eu.ase.ro.dam.subway_route.util_class.MetrorexLines;
 import eu.ase.ro.dam.subway_route.util_class.MetrorexSubwayStations;
 import eu.ase.ro.dam.subway_route.util_interface.Const;
 
-@Database(entities = {SubwayLine.class, Station.class}, version = 1, exportSchema = false)
+@Database(entities = {SubwayLine.class, Station.class}, version = 5, exportSchema = false)
 public abstract class DatabaseManager extends RoomDatabase {
     public static DatabaseManager databaseManager;
-
-    public static DatabaseManager getInstance(Context context){
-        if(databaseManager == null){
-            synchronized (DatabaseManager.class) {
-                if(databaseManager == null) {
-                    databaseManager = Room.databaseBuilder(context, DatabaseManager.class, Const.DATABASE_NAME).fallbackToDestructiveMigration().build();
-                    databaseManager.insertAllExistentLines();
-                    databaseManager.insertAllExistentStations();
-                    return databaseManager;
-                }
-            }
-        }
-        return databaseManager;
-    }
-
-    public abstract SubwayLineDao getSubwayLineDao();
-    public abstract StationDao getStationDao();
 
     private void insertAllExistentLines(){
         new Thread(new Runnable() {
@@ -60,4 +43,21 @@ public abstract class DatabaseManager extends RoomDatabase {
             }
         }).start();
     }
+
+    public static DatabaseManager getInstance(Context context){
+        if(databaseManager == null){
+            synchronized (DatabaseManager.class) {
+                if(databaseManager == null) {
+                    databaseManager = Room.databaseBuilder(context, DatabaseManager.class, Const.DATABASE_NAME).fallbackToDestructiveMigration().build();
+                    databaseManager.insertAllExistentLines();
+                    databaseManager.insertAllExistentStations();
+                    return databaseManager;
+                }
+            }
+        }
+        return databaseManager;
+    }
+
+    public abstract SubwayLineDao getSubwayLineDao();
+    public abstract StationDao getStationDao();
 }

@@ -30,7 +30,7 @@ public class SubwayLineService {
 
         @Override
         protected SubwayLine doInBackground(SubwayLine... subwayLines) {
-            if(subwayLines == null || subwayLines.length != -1) {
+            if(subwayLines == null || subwayLines.length != 1) {
                 return null;
             }
             SubwayLine subwayLine = subwayLines[0];
@@ -50,7 +50,7 @@ public class SubwayLineService {
 
         @Override
         protected Integer doInBackground(SubwayLine... subwayLines) {
-            if(subwayLines == null || subwayLines.length != -1) {
+            if(subwayLines == null || subwayLines.length != 1) {
                 return -1;
             }
             return subwayLineDao.updateLine(subwayLines[0]);
@@ -64,7 +64,7 @@ public class SubwayLineService {
 
         @Override
         protected Integer doInBackground(SubwayLine... subwayLines) {
-            if(subwayLines == null || subwayLines.length != -1) {
+            if(subwayLines == null || subwayLines.length != 1) {
                 return -1;
             }
             return subwayLineDao.deleteLine(subwayLines[0]);
