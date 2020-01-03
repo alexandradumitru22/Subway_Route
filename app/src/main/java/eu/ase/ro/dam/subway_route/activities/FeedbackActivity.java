@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputEditText;
 
 import eu.ase.ro.dam.subway_route.R;
+import eu.ase.ro.dam.subway_route.util_class.Feedback;
 import eu.ase.ro.dam.subway_route.util_interface.Const;
 
 public class FeedbackActivity extends AppCompatActivity {
@@ -30,6 +31,21 @@ public class FeedbackActivity extends AppCompatActivity {
         setContentView(R.layout.activity_feedback);
 
         initView();
+
+        intent = getIntent();
+
+        ibtn_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Feedback feedback = createFeedback();
+                Toast.makeText(getApplicationContext(), "Feedback salvat", Toast.LENGTH_SHORT).show();
+                //intent = new Intent(FeedbackActivity.this, ProfileActivity.class);
+                intent.putExtra(Const.FEEDBACK_KEY, feedback);
+                //startActivity(intent);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
     }
 
     private void initView(){
@@ -37,17 +53,7 @@ public class FeedbackActivity extends AppCompatActivity {
         rtb_feedback = findViewById(R.id.feedback_rtb_star);
         ibtn_save = findViewById(R.id.feedback_ibtn_save);
 
-        ibtn_save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Feedback salvat", Toast.LENGTH_SHORT).show();
-                intent = new Intent(FeedbackActivity.this, ProfileActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        rtb_feedback.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+        /*rtb_feedback.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 sharedPreferences = getSharedPreferences(Const.SHARED_PREF_NAME, Context.MODE_PRIVATE);
@@ -55,6 +61,13 @@ public class FeedbackActivity extends AppCompatActivity {
                 editor.putFloat(Const.SHARED_PREF_RATING_KEY, rating);
                 editor.apply();
             }
-        });
+        });*/
+    }
+
+    private Feedback createFeedback(){
+        String comm = comment.getText().toString();
+        Float nota = rtb_feedback.getRating();
+
+        return new Feedback(comm, nota);
     }
 }

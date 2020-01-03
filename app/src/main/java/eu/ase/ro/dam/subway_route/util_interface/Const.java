@@ -3,6 +3,7 @@ package eu.ase.ro.dam.subway_route.util_interface;
 public interface Const {
     String SEARCH_ROUTE_KEY = "searchRoute";
     String ROUTES_KEY = "myroutes";
+    String FEEDBACK_KEY = "addFeedback";
     String MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey";
 
     String SHARED_PREF_RATING_KEY = "ratingBarKey";
@@ -13,7 +14,7 @@ public interface Const {
 
     int SEARCH_ROUTE_CODE = 100;
     int ROUTES_CODE = 200;
-    int EDIT_ROUTE_CODE = 300;
+    int FEEDBACK_CODE = 300;
 
     String DATABASE_NAME = "SubwayDatabase";
 }

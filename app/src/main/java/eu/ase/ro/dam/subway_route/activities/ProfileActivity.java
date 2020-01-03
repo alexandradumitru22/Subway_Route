@@ -18,11 +18,13 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import eu.ase.ro.dam.subway_route.R;
+import eu.ase.ro.dam.subway_route.util_class.Feedback;
 import eu.ase.ro.dam.subway_route.util_class.Route;
 import eu.ase.ro.dam.subway_route.util_interface.Const;
 
@@ -35,6 +37,7 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView starNumber;
     private TextView userConnected;
     private SharedPreferences sharedPreferences;
+    private Feedback feedback;
 
     private DatabaseReference databaseReference;
 
@@ -44,8 +47,6 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         initView();
-
-
     }
 
     @Override
@@ -87,7 +88,7 @@ public class ProfileActivity extends AppCompatActivity {
                 break;
             case R.id.item_feedback:
                 intent = new Intent(getApplicationContext(), FeedbackActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, Const.FEEDBACK_CODE);
                 break;
         }
         return true;
@@ -102,6 +103,24 @@ public class ProfileActivity extends AppCompatActivity {
                 addRoute(route);
             }
         }
+
+        if(requestCode == Const.FEEDBACK_CODE && resultCode == RESULT_OK && data!=null){
+            feedback = data.getParcelableExtra(Const.FEEDBACK_KEY);
+            if(feedback != null){
+                Toast.makeText(getApplicationContext(), "merge", Toast.LENGTH_LONG).show();
+
+                String nota = String.valueOf(feedback.getNota());
+                starNumber.setText(nota);
+                String user = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+                feedback.setUsername(user);
+
+                databaseReference.setValue(feedback);
+            }
+            else {
+                Toast.makeText(getApplicationContext(), "nu merge", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     private void addRoute(Route r){
@@ -114,6 +133,9 @@ public class ProfileActivity extends AppCompatActivity {
         ibtnUpload = findViewById(R.id.profile_ibtn_upload);
         starNumber = findViewById(R.id.profile_tv_mark);
         userConnected = findViewById(R.id.profile_tv_user);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference("feedback").push();
 
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,9 +167,9 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        SharedPreferences mark = getSharedPreferences(Const.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        /*SharedPreferences mark = getSharedPreferences(Const.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         float nota = mark.getFloat(Const.SHARED_PREF_RATING_KEY, 0);
-        starNumber.setText(String.valueOf(nota));
+        starNumber.setText(String.valueOf(nota));*/
 
         SharedPreferences user = getSharedPreferences(Const.SHARED_PREF_LOG, Context.MODE_PRIVATE);
         String username = user.getString(Const.SP_MAIL_KEY, null);
