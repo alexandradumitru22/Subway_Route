@@ -18,6 +18,9 @@ public class Route implements Parcelable{
     private String shortestRoute;
     private String username;
 
+    public Route() {
+    }
+
     public Route(String depart, String destination, Date date, String type, String shortestRoute) {
         this.depart = depart;
         this.destination = destination;

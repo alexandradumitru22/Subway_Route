@@ -17,8 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +30,8 @@ import eu.ase.ro.dam.subway_route.R;
 import eu.ase.ro.dam.subway_route.util_class.Feedback;
 import eu.ase.ro.dam.subway_route.util_class.Route;
 import eu.ase.ro.dam.subway_route.util_interface.Const;
+
+import static java.lang.String.valueOf;
 
 public class ProfileActivity extends AppCompatActivity {
     public List<Route> routes = new ArrayList<>();
@@ -119,7 +124,7 @@ public class ProfileActivity extends AppCompatActivity {
             if(feedback != null){
                 Toast.makeText(getApplicationContext(), "Feedback adaugat cu succes", Toast.LENGTH_LONG).show();
 
-                String nota = String.valueOf(feedback.getNota());
+                String nota = valueOf(feedback.getNota());
                 starNumber.setText(nota);
                 String user = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
@@ -133,8 +138,32 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-    private void addRoute(Route r){
-        routes.add(r);
+    private void getMarkFromFirebase(){
+        FirebaseDatabase.getInstance().getReference().child("feedback").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot child : dataSnapshot.getChildren()){
+                    String user = child.getValue(Feedback.class).getUsername();
+                    String comm = child.getValue(Feedback.class).getComentariu();
+                    float mark = child.getValue(Feedback.class).getNota();
+
+                    Feedback f = new Feedback();
+
+                    f.setUsername(user);
+                    f.setNota(mark);
+                    f.setComentariu(comm);
+
+                    if(user.equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                        starNumber.setText(valueOf(mark));
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void initView() {
@@ -147,6 +176,8 @@ public class ProfileActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         databaseReferenceFeedback = database.getReference("feedback").push();
         databaseReferenceRoute = database.getReference("rute").push();
+
+        getMarkFromFirebase();
 
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override

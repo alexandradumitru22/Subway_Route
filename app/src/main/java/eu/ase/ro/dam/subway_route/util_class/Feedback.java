@@ -8,6 +8,9 @@ public class Feedback implements Parcelable {
     String comentariu;
     float nota;
 
+    public Feedback() {
+    }
+
     public Feedback(String comentariu, float nota) {
         this.comentariu = comentariu;
         this.nota = nota;
