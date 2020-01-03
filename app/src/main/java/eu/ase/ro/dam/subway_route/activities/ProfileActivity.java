@@ -39,7 +39,8 @@ public class ProfileActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private Feedback feedback;
 
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReferenceFeedback;
+    private DatabaseReference databaseReferenceRoute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,14 +101,23 @@ public class ProfileActivity extends AppCompatActivity {
         if ((resultCode == RESULT_OK && data != null) && (requestCode == Const.SEARCH_ROUTE_CODE)) {
             Route route = data.getParcelableExtra(Const.SEARCH_ROUTE_KEY);
             if (route != null) {
-                addRoute(route);
+                routes.add(route);
+
+                String user = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+                route.setUsername(user);
+
+                databaseReferenceRoute.setValue(routes);
+            }
+            else {
+                Toast.makeText(getApplicationContext(), "Eroare la salvarea feedback-ului", Toast.LENGTH_LONG).show();
             }
         }
 
         if(requestCode == Const.FEEDBACK_CODE && resultCode == RESULT_OK && data!=null){
             feedback = data.getParcelableExtra(Const.FEEDBACK_KEY);
             if(feedback != null){
-                Toast.makeText(getApplicationContext(), "merge", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Feedback adaugat cu succes", Toast.LENGTH_LONG).show();
 
                 String nota = String.valueOf(feedback.getNota());
                 starNumber.setText(nota);
@@ -115,10 +125,10 @@ public class ProfileActivity extends AppCompatActivity {
 
                 feedback.setUsername(user);
 
-                databaseReference.setValue(feedback);
+                databaseReferenceFeedback.setValue(feedback);
             }
             else {
-                Toast.makeText(getApplicationContext(), "nu merge", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Eroare la salvarea feedback-ului", Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -135,7 +145,8 @@ public class ProfileActivity extends AppCompatActivity {
         userConnected = findViewById(R.id.profile_tv_user);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("feedback").push();
+        databaseReferenceFeedback = database.getReference("feedback").push();
+        databaseReferenceRoute = database.getReference("rute").push();
 
         btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
