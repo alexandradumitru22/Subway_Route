@@ -8,21 +8,38 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import eu.ase.ro.dam.subway_route.R;
 import eu.ase.ro.dam.subway_route.util_interface.Const;
 
-public class MainActivity extends AppCompatActivity {
-    //public List<Route> routes = new ArrayList<>();
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
     private MenuItem itemSearch;
     private MenuItem itemRoutes;
     private MenuItem itemFeedback;
+
+    private MapView myMap;
+    private GoogleMap gmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //initView();
+        initView();
+
+        Bundle mapViewBundle = null;
+        if (savedInstanceState != null) {
+            mapViewBundle = savedInstanceState.getBundle(Const.MAP_VIEW_BUNDLE_KEY);
+        }
+
+        myMap.onCreate(mapViewBundle);
+        myMap.getMapAsync(this);
     }
 
     @Override
@@ -55,11 +72,6 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(getApplicationContext(), SearchRouteActivity.class);
                 startActivityForResult(intent, Const.SEARCH_ROUTE_CODE);//pentru ca o sa pasez din main in lista
                 break;
-            /*case R.id.item_routes:
-                intent = new Intent(getApplicationContext(), RoutesActivity.class);//ma duce in routes
-                intent.putParcelableArrayListExtra(Const.ROUTES_KEY, (ArrayList<Route>)routes);//pe intent pun ruta facuta in search
-                startActivityForResult(intent,Const.ROUTES_CODE);
-                break;*/
             case R.id.item_info:
                 intent = new Intent(getApplicationContext(), InfoActivity.class);
                 startActivity(intent);
@@ -72,24 +84,63 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
 
-    /*@Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if ((resultCode == RESULT_OK && data != null) && (requestCode == Const.SEARCH_ROUTE_CODE)) {
-            Route route = data.getParcelableExtra(Const.SEARCH_ROUTE_KEY);
-            if (route != null) {
-                addRoute(route);
-                Toast.makeText(getApplicationContext(), route.toString(), Toast.LENGTH_LONG).show();
-            }
+        Bundle mapViewBundle = outState.getBundle(Const.MAP_VIEW_BUNDLE_KEY);
+        if (mapViewBundle == null) {
+            mapViewBundle = new Bundle();
+            outState.putBundle(Const.MAP_VIEW_BUNDLE_KEY, mapViewBundle);
         }
+
+        myMap.onSaveInstanceState(mapViewBundle);
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        myMap.onResume();
     }
 
-    private void addRoute(Route r){
-        routes.add(r);
+    @Override
+    protected void onStart() {
+        super.onStart();
+        myMap.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        myMap.onStop();
+    }
+    @Override
+    protected void onPause() {
+        myMap.onPause();
+        super.onPause();
+    }
+    @Override
+    protected void onDestroy() {
+        myMap.onDestroy();
+        super.onDestroy();
+    }
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        myMap.onLowMemory();
     }
 
     private void initView() {
-        routes = new ArrayList<>();
-    }*/
+        myMap = findViewById(R.id.mv_maps);
+    }
+
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        gmap = googleMap;
+        gmap.setMinZoomPreference(12);
+        LatLng buc = new LatLng(44.426843,26.1015608);
+        gmap.addMarker(new MarkerOptions().position(buc).title("Bucuresti"));
+        gmap.moveCamera(CameraUpdateFactory.newLatLng(buc));
+        gmap.animateCamera(CameraUpdateFactory.zoomTo(10.0f));
+    }
 }
