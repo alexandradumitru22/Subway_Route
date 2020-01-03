@@ -1,4 +1,4 @@
-package eu.ase.ro.dam.subway_route.database.table;
+package eu.ase.ro.dam.subway_route.DB.table;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
@@ -14,29 +15,33 @@ import static androidx.room.ForeignKey.CASCADE;
 
 @Entity(tableName = "stations",
         indices = {@Index(value = "lineId", unique = true)},
-        foreignKeys = @ForeignKey(entity = SubwayLine.class, parentColumns = "id", childColumns = "lineId", onDelete = CASCADE))
+        foreignKeys = @ForeignKey(entity = Line.class, parentColumns = "id", childColumns = "lineId", onDelete = CASCADE))
 public class Station implements Parcelable {
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "id")
-    private long id;
+    long id;
 
     @ColumnInfo(name = "cod")
-    private String cod;
+    String cod;
 
     @ColumnInfo(name = "station")
-    private String stationName;
+    String station;
 
     @ColumnInfo(name = "node")
-    private int node;
+    Integer node;
 
     @ColumnInfo(name = "lineId")
-    private long lineId;
+    long lineId;
 
-    public Station(long id, String cod, String stationName, int node, long lineId) {
+    @Ignore
+    public Station() {
+    }
+
+    public Station(long id, String cod, String station, Integer node, long lineId) {
         this.id = id;
         this.cod = cod;
-        this.stationName = stationName;
+        this.station = station;
         this.node = node;
         this.lineId = lineId;
     }
@@ -44,8 +49,12 @@ public class Station implements Parcelable {
     protected Station(Parcel in) {
         id = in.readLong();
         cod = in.readString();
-        stationName = in.readString();
-        node = in.readInt();
+        station = in.readString();
+        if (in.readByte() == 0) {
+            node = null;
+        } else {
+            node = in.readInt();
+        }
         lineId = in.readLong();
     }
 
@@ -77,19 +86,19 @@ public class Station implements Parcelable {
         this.cod = cod;
     }
 
-    public String getStationName() {
-        return stationName;
+    public String getStation() {
+        return station;
     }
 
-    public void setStationName(String stationName) {
-        this.stationName = stationName;
+    public void setStation(String station) {
+        this.station = station;
     }
 
-    public int getNode() {
+    public Integer getNode() {
         return node;
     }
 
-    public void setNode(int node) {
+    public void setNode(Integer node) {
         this.node = node;
     }
 
@@ -106,7 +115,7 @@ public class Station implements Parcelable {
         return "Station{" +
                 "id=" + id +
                 ", cod='" + cod + '\'' +
-                ", stationName='" + stationName + '\'' +
+                ", station='" + station + '\'' +
                 ", node=" + node +
                 ", lineId=" + lineId +
                 '}';
@@ -121,9 +130,13 @@ public class Station implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(id);
         dest.writeString(cod);
-        dest.writeString(stationName);
-        dest.writeInt(node);
+        dest.writeString(station);
+        if (node == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(node);
+        }
         dest.writeLong(lineId);
     }
 }
-

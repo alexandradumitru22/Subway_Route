@@ -1,20 +1,21 @@
-package eu.ase.ro.dam.subway_route.database.service;
-
-import java.util.List;
+package eu.ase.ro.dam.subway_route.DB.service;
 
 import android.content.Context;
 import android.os.AsyncTask;
 
-import eu.ase.ro.dam.subway_route.database.DatabaseManager;
-import eu.ase.ro.dam.subway_route.database.dao.StationDao;
-import eu.ase.ro.dam.subway_route.database.table.Station;
+import java.util.List;
+
+import eu.ase.ro.dam.subway_route.DB.DatabaseManager;
+import eu.ase.ro.dam.subway_route.DB.dao.StationDao;
+import eu.ase.ro.dam.subway_route.DB.table.Line;
+import eu.ase.ro.dam.subway_route.DB.table.Station;
 
 public class StationService {
     private static StationDao stationDao;
 
-    public static class GetAllStatios extends AsyncTask<Void, Void, List<Station>>{
-        public GetAllStatios(Context context) {
-            stationDao= DatabaseManager.getInstance(context).getStationDao();
+    public static class GetAllStations extends AsyncTask<Void, Void, List<Station>> {
+        public GetAllStations(Context context) {
+            stationDao = DatabaseManager.getInstance(context).getStationDao();
         }
 
         @Override
@@ -23,18 +24,18 @@ public class StationService {
         }
     }
 
-    public static class InsertStation extends AsyncTask<Station, Void, Station>{
-        public InsertStation(Context context) {
-            stationDao= DatabaseManager.getInstance(context).getStationDao();
+    public static class InserStation extends AsyncTask<Station, Void, Station>{
+        public InserStation(Context context) {
+            stationDao = DatabaseManager.getInstance(context).getStationDao();
         }
 
         @Override
         protected Station doInBackground(Station... stations) {
-            if(stations == null || stations.length != 1) {
+            if(stations == null || stations.length != 1){
                 return null;
             }
             Station station = stations[0];
-            long id = stationDao.insertStation(station);
+            long id = stationDao.insert(station);
             if(id != -1){
                 station.setId(id);
                 return station;
@@ -45,29 +46,31 @@ public class StationService {
 
     public static class UpdateStation extends AsyncTask<Station, Void, Integer>{
         public UpdateStation(Context context) {
-            stationDao= DatabaseManager.getInstance(context).getStationDao();
+            stationDao = DatabaseManager.getInstance(context).getStationDao();
         }
+
 
         @Override
         protected Integer doInBackground(Station... stations) {
             if (stations == null || stations.length != 1) {
                 return -1;
             }
-            return stationDao.updateStation(stations[0]);
+            return stationDao.update(stations[0]);
         }
     }
 
     public static class DeleteStation extends AsyncTask<Station, Void, Integer>{
         public DeleteStation(Context context) {
-            stationDao= DatabaseManager.getInstance(context).getStationDao();
+            stationDao = DatabaseManager.getInstance(context).getStationDao();
         }
+
 
         @Override
         protected Integer doInBackground(Station... stations) {
             if (stations == null || stations.length != 1) {
                 return -1;
             }
-            return stationDao.deleteStation(stations[0]);
+            return stationDao.delete(stations[0]);
         }
     }
 }

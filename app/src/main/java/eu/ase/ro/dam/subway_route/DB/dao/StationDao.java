@@ -1,6 +1,4 @@
-package eu.ase.ro.dam.subway_route.database.dao;
-
-import java.util.List;
+package eu.ase.ro.dam.subway_route.DB.dao;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -8,23 +6,24 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import eu.ase.ro.dam.subway_route.database.table.Station;
+import java.util.List;
+
+import eu.ase.ro.dam.subway_route.DB.table.Station;
 
 @Dao
 public interface StationDao {
-
     @Query("select * from stations")
     List<Station> getAllStations();
 
     @Insert
-    long insertStation (Station station);
+    long insert(Station station);
 
     @Update
-    int updateStation (Station station);
+    int update(Station station);
 
     @Delete
-    int deleteStation (Station station);
+    int delete(Station station);
 
-    @Query("select COUNT(*) from stations")
+    @Query("SELECT COUNT (*) FROM stations")
     int countStations();
 }

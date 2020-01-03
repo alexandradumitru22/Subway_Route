@@ -1,6 +1,6 @@
 package eu.ase.ro.dam.subway_route.util_class;
 
-import eu.ase.ro.dam.subway_route.database.table.Station;
+import eu.ase.ro.dam.subway_route.DB.table.Station;
 
 public class MetrorexSubwayStations {
     public static Station[] METROREX_STATIONS = {

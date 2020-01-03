@@ -14,5 +14,5 @@ public interface Const {
     int ROUTES_CODE = 200;
     int EDIT_ROUTE_CODE = 300;
 
-    String DATABASE_NAME = "SubwayRouteDatabase";
+    String DATABASE_NAME = "SubwayDatabase";
 }

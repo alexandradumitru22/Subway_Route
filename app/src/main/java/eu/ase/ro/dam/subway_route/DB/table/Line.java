@@ -1,4 +1,4 @@
-package eu.ase.ro.dam.subway_route.database.table;
+package eu.ase.ro.dam.subway_route.DB.table;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -6,32 +6,36 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "lines")
-public class SubwayLine implements Parcelable {
+public class Line implements Parcelable {
     @NonNull
     @PrimaryKey
     @ColumnInfo(name = "id")
     long id;
 
-    @NonNull
-    @ColumnInfo(name = "name")
-    private String name;
+    @ColumnInfo(name = "line")
+    String name;
 
     @ColumnInfo(name = "firstStation")
-    private String firstStation;
+    String firstStation;
 
     @ColumnInfo(name = "lastStation")
-    private String lastStation;
+    String lastStation;
 
     @ColumnInfo(name = "color")
-    private String lineColor;
+    String lineColor;
 
-    @ColumnInfo(name = "active")
-    private int used;
+    @ColumnInfo(name = "used")
+    Integer used;
 
-    public SubwayLine(long id, @NonNull String name, String firstStation, String lastStation, String lineColor, int used) {
+    @Ignore
+    public Line() {
+    }
+
+    public Line(long id, String name, String firstStation, String lastStation, String lineColor, Integer used) {
         this.id = id;
         this.name = name;
         this.firstStation = firstStation;
@@ -40,24 +44,28 @@ public class SubwayLine implements Parcelable {
         this.used = used;
     }
 
-    protected SubwayLine(Parcel in) {
+    protected Line(Parcel in) {
         id = in.readLong();
         name = in.readString();
         firstStation = in.readString();
         lastStation = in.readString();
         lineColor = in.readString();
-        used = in.readInt();
+        if (in.readByte() == 0) {
+            used = null;
+        } else {
+            used = in.readInt();
+        }
     }
 
-    public static final Creator<SubwayLine> CREATOR = new Creator<SubwayLine>() {
+    public static final Creator<Line> CREATOR = new Creator<Line>() {
         @Override
-        public SubwayLine createFromParcel(Parcel in) {
-            return new SubwayLine(in);
+        public Line createFromParcel(Parcel in) {
+            return new Line(in);
         }
 
         @Override
-        public SubwayLine[] newArray(int size) {
-            return new SubwayLine[size];
+        public Line[] newArray(int size) {
+            return new Line[size];
         }
     };
 
@@ -69,12 +77,11 @@ public class SubwayLine implements Parcelable {
         this.id = id;
     }
 
-    @NonNull
     public String getName() {
         return name;
     }
 
-    public void setName(@NonNull String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -102,17 +109,17 @@ public class SubwayLine implements Parcelable {
         this.lineColor = lineColor;
     }
 
-    public int getUsed() {
+    public Integer getUsed() {
         return used;
     }
 
-    public void setUsed(int used) {
+    public void setUsed(Integer used) {
         this.used = used;
     }
 
     @Override
     public String toString() {
-        return "SubwayLine{" +
+        return "Line{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", firstStation='" + firstStation + '\'' +
@@ -134,6 +141,11 @@ public class SubwayLine implements Parcelable {
         dest.writeString(firstStation);
         dest.writeString(lastStation);
         dest.writeString(lineColor);
-        dest.writeInt(used);
+        if (used == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(used);
+        }
     }
 }
