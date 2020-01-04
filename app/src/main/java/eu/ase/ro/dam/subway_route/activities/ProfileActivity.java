@@ -7,27 +7,36 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import eu.ase.ro.dam.subway_route.R;
 import eu.ase.ro.dam.subway_route.util_class.Feedback;
+import eu.ase.ro.dam.subway_route.util_class.ProfilPicture;
 import eu.ase.ro.dam.subway_route.util_class.Route;
 import eu.ase.ro.dam.subway_route.util_interface.Const;
 
@@ -44,9 +53,19 @@ public class ProfileActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private Feedback feedback;
     private TextView toChart;
+    private ImageView profilePicture;
+
+    private ImageButton manButton;
+    private ImageButton femaleButton;
 
     private DatabaseReference databaseReferenceFeedback;
     private DatabaseReference databaseReferenceRoute;
+    private DatabaseReference databaseReferenceProfil;
+
+    public static final int REQ_CODE_IMAGE = 1;
+
+    private String manURL = "https://previews.123rf.com/images/jemastock/jemastock1705/jemastock170501669/77402307-color-pencil-front-face-caricature-old-man-with-moustache-vector-illustration.jpg";
+    private String womanURL = "https://previews.123rf.com/images/grgroup/grgroup1704/grgroup170403176/76734850-color-pencil-drawing-of-caricature-half-body-girl-with-red-long-hair-vector-illustration.jpg";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +73,8 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         initView();
+
+        getProfileImageFromFirebase();
     }
 
     @Override
@@ -137,6 +158,18 @@ public class ProfileActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Eroare la salvarea feedback-ului", Toast.LENGTH_LONG).show();
             }
         }
+
+        if(requestCode == REQ_CODE_IMAGE && resultCode == RESULT_OK
+                && data != null && data.getData() != null){
+            Uri imageUri = data.getData();
+            profilePicture.setImageURI(imageUri);
+            try{
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+                profilePicture.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void getMarkFromFirebase(){
@@ -167,17 +200,47 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
+    private void getProfileImageFromFirebase(){
+        FirebaseDatabase.getInstance().getReference().child("profile").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot child : dataSnapshot.getChildren()){
+                    String user = child.getValue(ProfilPicture.class).getUser();
+                    String URL = child.getValue(ProfilPicture.class).getURL();
+
+                    ProfilPicture pp = new ProfilPicture();
+
+                    pp.setUser(user);
+                    pp.setURL(URL);
+
+                    if(user.equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                        Picasso.get().load(URL).into(profilePicture);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     private void initView() {
         routes = new ArrayList<>();
+        profilePicture = findViewById(R.id.profilePicture);
         btnExit = findViewById(R.id.profile_btn_deconectare);
         ibtnUpload = findViewById(R.id.profile_ibtn_upload);
         starNumber = findViewById(R.id.profile_tv_mark);
         userConnected = findViewById(R.id.profile_tv_user);
         toChart = findViewById(R.id.tv_profile_chart);
+        manButton = findViewById(R.id.ib_male);
+        femaleButton = findViewById(R.id.ib_female);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         databaseReferenceFeedback = database.getReference("feedback").push();
         databaseReferenceRoute = database.getReference("rute").push();
+        databaseReferenceProfil = database.getReference("profile").push();
 
         getMarkFromFirebase();
 
@@ -212,10 +275,44 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        ibtnUpload.setOnClickListener(new View.OnClickListener() {
+        manButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), R.string.eventUpload, Toast.LENGTH_LONG).show();
+                Picasso.get().load(manURL).into(profilePicture);
+
+                ProfilPicture profilPicture = new ProfilPicture();
+
+                String user = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                String url = manURL;
+                profilPicture.setUser(user);
+                profilPicture.setURL(url);
+
+                databaseReferenceProfil.setValue(profilPicture);
+            }
+        });
+
+        femaleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Picasso.get().load(womanURL).into(profilePicture);
+
+                ProfilPicture profilPicture = new ProfilPicture();
+                String user = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                String url = womanURL;
+                profilPicture.setUser(user);
+                profilPicture.setURL(url);
+
+                databaseReferenceProfil.setValue(profilPicture);
+            }
+        });
+
+        ibtnUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, REQ_CODE_IMAGE);
             }
         });
 

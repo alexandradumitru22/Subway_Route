@@ -37,6 +37,7 @@ dependencies {
     annotationProcessor 'android.arch.persistence.room:compiler:' + rootProject.archRoomVersion
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.github.AnyChart:AnyChart-Android:0.0.3'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
 
 apply plugin: 'com.google.gms.google-services'
