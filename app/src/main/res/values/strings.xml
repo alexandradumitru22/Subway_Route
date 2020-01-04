@@ -56,6 +56,7 @@
     <string name="errSameUser">Acest utilizator exista deja!</string>
     <string name="errAuth">Autentificare esuata!</string>
     <string name="errLogin">Conectare esuata!</string>
+    <string name="vezi_parerea_celorlalti_utilizatori"><u>Vezi parerea celorlalti utilizatori</u></string>
 
     <string-array name="search_route_type">
         <item>Dus</item>

@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="32dp"
         android:text="@string/ai_oferit_aplicatiei_nota"
         app:layout_constraintEnd_toStartOf="@+id/profile_tv_mark"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,12 +64,9 @@
         android:id="@+id/profile_tv_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="@string/username_damproject_ro"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/profile_tv_info_username"
         app:layout_constraintTop_toBottomOf="@+id/profilePicture" />
@@ -78,7 +75,7 @@
         android:id="@+id/profile_tv_mark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="50dp"
         android:layout_marginRight="50dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -100,18 +97,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_info_feedback" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_profile_chart" />
 
     <TextView
         android:id="@+id/tv_profile_chart"
-        android:layout_width="75dp"
-        android:layout_height="11dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Vezi parerea celorlalti utilizatori"
+        android:text="@string/vezi_parerea_celorlalti_utilizatori"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_info_feedback" />
