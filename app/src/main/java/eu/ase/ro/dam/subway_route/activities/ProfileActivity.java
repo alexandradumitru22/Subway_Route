@@ -43,6 +43,7 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView userConnected;
     private SharedPreferences sharedPreferences;
     private Feedback feedback;
+    private TextView toChart;
 
     private DatabaseReference databaseReferenceFeedback;
     private DatabaseReference databaseReferenceRoute;
@@ -172,6 +173,7 @@ public class ProfileActivity extends AppCompatActivity {
         ibtnUpload = findViewById(R.id.profile_ibtn_upload);
         starNumber = findViewById(R.id.profile_tv_mark);
         userConnected = findViewById(R.id.profile_tv_user);
+        toChart = findViewById(R.id.tv_profile_chart);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         databaseReferenceFeedback = database.getReference("feedback").push();
@@ -199,6 +201,14 @@ public class ProfileActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        toChart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), ChartActivity.class);
+                startActivity(i);
             }
         });
 
