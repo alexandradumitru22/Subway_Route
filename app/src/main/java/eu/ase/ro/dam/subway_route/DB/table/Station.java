@@ -38,6 +38,12 @@ public class Station implements Parcelable {
     public Station() {
     }
 
+    public Station(String station, long lineId) {
+        this.station = station;
+        this.lineId = lineId;
+    }
+
+    @Ignore
     public Station(long id, String cod, String station, Integer node, long lineId) {
         this.id = id;
         this.cod = cod;
@@ -112,13 +118,7 @@ public class Station implements Parcelable {
 
     @Override
     public String toString() {
-        return "Station{" +
-                "id=" + id +
-                ", cod='" + cod + '\'' +
-                ", station='" + station + '\'' +
-                ", node=" + node +
-                ", lineId=" + lineId +
-                '}';
+        return "STATIA: " + station + " - MAGISTRALA: " + lineId;
     }
 
     @Override

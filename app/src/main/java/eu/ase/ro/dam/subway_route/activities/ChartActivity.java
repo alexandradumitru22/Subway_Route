@@ -53,6 +53,8 @@ public class ChartActivity extends AppCompatActivity {
 
                     fs.add(f);
 
+                    int m0 = 0;
+                    int m05 = 0;
                     int m1 = 0;
                     int m15 = 0;
                     int m2 = 0;
@@ -64,6 +66,12 @@ public class ChartActivity extends AppCompatActivity {
                     int m5 = 0;
 
                     for (Feedback feedback:fs){
+                        if(feedback.getNota() == 0){
+                            m0++;
+                        }
+                        if(feedback.getNota() == 0.5){
+                            m05++;
+                        }
                         if(feedback.getNota() == 1){
                             m1++;
                         }
@@ -97,7 +105,9 @@ public class ChartActivity extends AppCompatActivity {
 
                     List<DataEntry> data = new ArrayList<>();
 
-                    data.add(new ValueDataEntry("1 stea", m1));
+                    data.add(new ValueDataEntry("0 stele", m0));
+                    data.add(new ValueDataEntry("0.5 stele", m05));
+                    data.add(new ValueDataEntry("o stea", m1));
                     data.add(new ValueDataEntry("1.5 stele", m15));
                     data.add(new ValueDataEntry("2 stele", m2));
                     data.add(new ValueDataEntry("2.5 stele", m25));

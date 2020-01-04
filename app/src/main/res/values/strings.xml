@@ -40,7 +40,7 @@
     <string name="nu_ai_cont_inregistreaza_te">Nu ai cont? Inregistreaza-te!</string>
     <string name="info_deconectare">Utilizatorul a fost deconectat</string>
     <string name="eventUpload">De aici se incarca imaginea de profil</string>
-    <string name="aici_vor_fi_statiile_ce_alcatuiesc_ruta">Aici vor fi statiile ce alcatuiesc ruta</string>
+    <string name="aici_vor_fi_statiile_ce_alcatuiesc_ruta">Parcurge statiile pana la destinatie</string>
     <string name="todo">TODO</string>
     <string name="ai_oferit_aplicatiei_nota">Ai oferit aplicatiei nota:</string>
     <string name="username">Username:</string>
