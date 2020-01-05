@@ -4,14 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.anychart.anychart.AnyChart;
 import com.anychart.anychart.AnyChartView;
 import com.anychart.anychart.DataEntry;
 import com.anychart.anychart.Pie;
 import com.anychart.anychart.ValueDataEntry;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -37,7 +35,7 @@ public class ChartActivity extends AppCompatActivity {
     }
 
     private void getFeedbackFromFirebase(){
-        FirebaseDatabase.getInstance().getReference().child("feedback").addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child(getString(R.string.cf)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot child : dataSnapshot.getChildren()){
@@ -105,17 +103,17 @@ public class ChartActivity extends AppCompatActivity {
 
                     List<DataEntry> data = new ArrayList<>();
 
-                    data.add(new ValueDataEntry("0 stele", m0));
-                    data.add(new ValueDataEntry("0.5 stele", m05));
-                    data.add(new ValueDataEntry("o stea", m1));
-                    data.add(new ValueDataEntry("1.5 stele", m15));
-                    data.add(new ValueDataEntry("2 stele", m2));
-                    data.add(new ValueDataEntry("2.5 stele", m25));
-                    data.add(new ValueDataEntry("3 stele", m3));
-                    data.add(new ValueDataEntry("3.5 stele", m35));
-                    data.add(new ValueDataEntry("4 stele", m4));
-                    data.add(new ValueDataEntry("4.5 stele", m45));
-                    data.add(new ValueDataEntry("5 stele", m5));
+                    data.add(new ValueDataEntry(getString(R.string.zero), m0));
+                    data.add(new ValueDataEntry(getString(R.string.zeroc), m05));
+                    data.add(new ValueDataEntry(getString(R.string.ost), m1));
+                    data.add(new ValueDataEntry(getString(R.string.osj), m15));
+                    data.add(new ValueDataEntry(getString(R.string.dois), m2));
+                    data.add(new ValueDataEntry(getString(R.string.doisj), m25));
+                    data.add(new ValueDataEntry(getString(R.string.treis), m3));
+                    data.add(new ValueDataEntry(getString(R.string.treisj), m35));
+                    data.add(new ValueDataEntry(getString(R.string.patrus), m4));
+                    data.add(new ValueDataEntry(getString(R.string.patrusj), m45));
+                    data.add(new ValueDataEntry(getString(R.string.cincis), m5));
 
                     pie.setData(data);
 

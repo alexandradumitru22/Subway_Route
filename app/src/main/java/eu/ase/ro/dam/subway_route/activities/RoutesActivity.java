@@ -9,29 +9,23 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import eu.ase.ro.dam.subway_route.R;
-import eu.ase.ro.dam.subway_route.util_class.Feedback;
 import eu.ase.ro.dam.subway_route.util_class.Route;
 import eu.ase.ro.dam.subway_route.util_class.RouteAdapter;
 import eu.ase.ro.dam.subway_route.util_interface.Const;
 
 public class RoutesActivity extends AppCompatActivity {
     ListView lv_routes;
-    Route route;
     List<Route> routes = new ArrayList<>();
     Intent intent;
-    //int selectedRouteIndex;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +37,14 @@ public class RoutesActivity extends AppCompatActivity {
         getRouteListFromFirebase();
     }
 
-    private void initView (){
+    private void initView() {
         lv_routes = findViewById(R.id.routes_lv_routes);
         intent = getIntent();
         ArrayList<Route> list = intent.getParcelableArrayListExtra(Const.ROUTES_KEY);
-        if( list!=null ){
+        if (list != null) {
             routes = list;
         }
 
-        //ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, routes);
         RouteAdapter adapter = new RouteAdapter(getApplicationContext(), R.layout.route_adapter, routes, getLayoutInflater());
         lv_routes.setAdapter(adapter);
 
@@ -59,15 +52,13 @@ public class RoutesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getApplicationContext(), AllStations.class);
-                /*selectedRouteIndex = position;
-                intent.putExtra(Const.SEARCH_ROUTE_KEY, routes.get(position));*/
                 startActivity(intent);
             }
         });
     }
 
-    private void getRouteListFromFirebase(){
-        FirebaseDatabase.getInstance().getReference().child("rute").addValueEventListener(new ValueEventListener() {
+    private void getRouteListFromFirebase() {
+        FirebaseDatabase.getInstance().getReference().child(getString(R.string.cr)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 /*for(DataSnapshot child : dataSnapshot.getChildren()){
@@ -110,6 +101,7 @@ public class RoutesActivity extends AppCompatActivity {
             }
         });
     }
+}
 
     /*@Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -131,4 +123,3 @@ public class RoutesActivity extends AppCompatActivity {
         routes.get(selectedRouteIndex).setType(r.getType());
         routes.get(selectedRouteIndex).setShortestRoute(r.getShortestRoute());
     }*/
-}

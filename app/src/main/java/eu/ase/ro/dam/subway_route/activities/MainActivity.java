@@ -68,16 +68,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.item_search_route:
-                intent = new Intent(getApplicationContext(), SearchRouteActivity.class);
-                startActivityForResult(intent, Const.SEARCH_ROUTE_CODE);//pentru ca o sa pasez din main in lista
-                break;
             case R.id.item_info:
                 intent = new Intent(getApplicationContext(), InfoActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.item_feedback:
-                intent = new Intent(getApplicationContext(), FeedbackActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -139,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         gmap = googleMap;
         gmap.setMinZoomPreference(12);
         LatLng buc = new LatLng(44.426843,26.1015608);
-        gmap.addMarker(new MarkerOptions().position(buc).title("Bucuresti"));
+        gmap.addMarker(new MarkerOptions().position(buc).title(getString(R.string.buc)));
         gmap.moveCamera(CameraUpdateFactory.newLatLng(buc));
         gmap.animateCamera(CameraUpdateFactory.zoomTo(10.0f));
     }

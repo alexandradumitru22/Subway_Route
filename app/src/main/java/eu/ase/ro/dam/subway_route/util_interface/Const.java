@@ -15,6 +15,7 @@ public interface Const {
     int SEARCH_ROUTE_CODE = 100;
     int ROUTES_CODE = 200;
     int FEEDBACK_CODE = 300;
+    int REQ_CODE_IMAGE = 400;
 
     String DATABASE_NAME = "SubwayDatabase";
 }

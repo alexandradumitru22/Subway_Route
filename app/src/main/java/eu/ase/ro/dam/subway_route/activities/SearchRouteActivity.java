@@ -102,7 +102,7 @@ public class SearchRouteActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(infoValidation()){
                     Route route = createSearchedRoute();
-                    Toast.makeText(getApplicationContext(), "Se cauta... ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.secauta, Toast.LENGTH_SHORT).show();
                     intent.putExtra(Const.SEARCH_ROUTE_KEY, route);
                     setResult(RESULT_OK, intent);
                     finish();

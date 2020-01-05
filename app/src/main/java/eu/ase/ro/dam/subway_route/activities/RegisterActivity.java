@@ -58,7 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            Toast.makeText(getApplicationContext(), R.string.errOnStartSignIn, Toast.LENGTH_LONG).show();
+
         }
     }
 
@@ -71,7 +71,6 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // autentificare cu succes
                             FirebaseUser user = mAuth.getCurrentUser();
                             Toast.makeText(getApplicationContext(), R.string.info_creare_user, Toast.LENGTH_LONG).show();
                             intent = new Intent(RegisterActivity.this, LoginActivity.class);
@@ -85,7 +84,6 @@ public class RegisterActivity extends AppCompatActivity {
                             else{
                                 Toast.makeText(getApplicationContext(), R.string.errAuth, Toast.LENGTH_SHORT).show();
                             }
-                            //Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });

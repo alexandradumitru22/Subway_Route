@@ -62,8 +62,6 @@ public class ProfileActivity extends AppCompatActivity {
     private DatabaseReference databaseReferenceRoute;
     private DatabaseReference databaseReferenceProfil;
 
-    public static final int REQ_CODE_IMAGE = 1;
-
     private String manURL = "https://previews.123rf.com/images/jemastock/jemastock1705/jemastock170501669/77402307-color-pencil-front-face-caricature-old-man-with-moustache-vector-illustration.jpg";
     private String womanURL = "https://previews.123rf.com/images/grgroup/grgroup1704/grgroup170403176/76734850-color-pencil-drawing-of-caricature-half-body-girl-with-red-long-hair-vector-illustration.jpg";
 
@@ -137,14 +135,14 @@ public class ProfileActivity extends AppCompatActivity {
                 databaseReferenceRoute.setValue(routes);
             }
             else {
-                Toast.makeText(getApplicationContext(), "Eroare la salvarea feedback-ului", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.errsavef, Toast.LENGTH_LONG).show();
             }
         }
 
         if(requestCode == Const.FEEDBACK_CODE && resultCode == RESULT_OK && data!=null){
             feedback = data.getParcelableExtra(Const.FEEDBACK_KEY);
             if(feedback != null){
-                Toast.makeText(getApplicationContext(), "Feedback adaugat cu succes", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.savef, Toast.LENGTH_LONG).show();
 
                 String nota = valueOf(feedback.getNota());
                 starNumber.setText(nota);
@@ -155,11 +153,11 @@ public class ProfileActivity extends AppCompatActivity {
                 databaseReferenceFeedback.setValue(feedback);
             }
             else {
-                Toast.makeText(getApplicationContext(), "Eroare la salvarea feedback-ului", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.errsavef, Toast.LENGTH_LONG).show();
             }
         }
 
-        if(requestCode == REQ_CODE_IMAGE && resultCode == RESULT_OK
+        if(requestCode == Const.REQ_CODE_IMAGE && resultCode == RESULT_OK
                 && data != null && data.getData() != null){
             Uri imageUri = data.getData();
             profilePicture.setImageURI(imageUri);
@@ -173,7 +171,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void getMarkFromFirebase(){
-        FirebaseDatabase.getInstance().getReference().child("feedback").addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child(getString(R.string.cf)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot child : dataSnapshot.getChildren()){
@@ -201,7 +199,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void getProfileImageFromFirebase(){
-        FirebaseDatabase.getInstance().getReference().child("profile").addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child(getString(R.string.cp)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot child : dataSnapshot.getChildren()){
@@ -312,7 +310,7 @@ public class ProfileActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(intent, REQ_CODE_IMAGE);
+                startActivityForResult(intent, Const.REQ_CODE_IMAGE);
             }
         });
 

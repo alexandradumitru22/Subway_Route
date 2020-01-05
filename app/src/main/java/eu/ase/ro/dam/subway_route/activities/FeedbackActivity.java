@@ -2,14 +2,12 @@ package eu.ase.ro.dam.subway_route.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
-import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -37,13 +35,13 @@ public class FeedbackActivity extends AppCompatActivity {
         ibtn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Feedback feedback = createFeedback();
-                Toast.makeText(getApplicationContext(), "Feedback salvat", Toast.LENGTH_SHORT).show();
-                //intent = new Intent(FeedbackActivity.this, ProfileActivity.class);
-                intent.putExtra(Const.FEEDBACK_KEY, feedback);
-                //startActivity(intent);
-                setResult(RESULT_OK, intent);
-                finish();
+                if(infoValidation()) {
+                    Feedback feedback = createFeedback();
+                    Toast.makeText(getApplicationContext(), R.string.feedbacksalvat, Toast.LENGTH_SHORT).show();
+                    intent.putExtra(Const.FEEDBACK_KEY, feedback);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
             }
         });
     }
@@ -62,6 +60,14 @@ public class FeedbackActivity extends AppCompatActivity {
                 editor.apply();
             }
         });*/
+    }
+
+    private boolean infoValidation() {
+        if (comment.getText() == null || comment.getText().toString().trim().isEmpty()) {
+            Toast.makeText(getApplicationContext(), R.string.icomm, Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 
     private Feedback createFeedback(){

@@ -17,7 +17,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import eu.ase.ro.dam.subway_route.R;
 import eu.ase.ro.dam.subway_route.util_interface.Const;
@@ -37,7 +36,6 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         initView();
-        Toast.makeText(getApplicationContext(), myEmail(), Toast.LENGTH_SHORT).show();
 
         if(myEmail() != null){
             Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
@@ -55,7 +53,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(infoValidation()){
                     login();
-                    Toast.makeText(getApplicationContext(), myEmail(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -70,13 +67,11 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Logare cu succes
                             rememberMe(mail, pass);
                             intent = new Intent(LoginActivity.this, ProfileActivity.class);
                             startActivity(intent);
                             finish();
                         } else {
-                            //logare nereusita
                             Toast.makeText(getApplicationContext(), R.string.errLogin, Toast.LENGTH_SHORT).show();
                         }
                     }
